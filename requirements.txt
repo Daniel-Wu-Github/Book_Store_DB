@@ -1,0 +1,19 @@
+# This is a Java-first project. Dependency management is expected to be handled
+# by Maven or Gradle. Use the project's build file (pom.xml or build.gradle)
+# to declare dependencies. Below are suggested Maven coordinates you can add
+# to your `pom.xml` dependencies section as a reference.
+
+# spring-boot-starter-web
+org.springframework.boot:spring-boot-starter-web:3.0.0
+# spring-boot-starter-data-jpa
+org.springframework.boot:spring-boot-starter-data-jpa:3.0.0
+# MySQL connector
+mysql:mysql-connector-java:8.0.33
+# Spring Security / JWT support (or use jjwt)
+org.springframework.boot:spring-boot-starter-security:3.0.0
+io.jsonwebtoken:jjwt-api:0.11.5
+# JavaMail (for email)
+org.springframework.boot:spring-boot-starter-mail:3.0.0
+
+# If you want me to actually scaffold a Maven project (pom.xml + src/...), tell me
+# and I'll create it with these dependencies pinned to workable versions.
