@@ -2,6 +2,19 @@ Alright, Daniel — this looks like a classic, well-scoped CS project. I've read
 
 This plan omits Python options and assumes a Java stack (Spring Boot backend + JavaFX or Swing desktop GUI). It breaks the work into phases with concrete tasks and acceptance criteria.
 
+Scaffold note: I added a `pom.xml` (Maven) to this repository that includes Spring Boot starters, JWT libs, Lombok, and compiler/plugin configuration (Java 17). The POM includes the maven-compiler-plugin with Lombok as an annotation processor and the Spring Boot Maven plugin so you can build a runnable JAR with `mvn clean package`.
+
+
+## High-level contract
+- Inputs: user actions from the desktop client (register, login, search, add-to-cart, place order, manager actions).
+- Outputs: REST API responses (JSON), emails for order receipts, persistent data in MySQL.
+- Error modes: invalid auth, DB errors, network timeouts, validation failures.
+- Success: full end-to-end flows for CUSTOMER and MANAGER roles work, GUI stays responsive, and basic security (hashed passwords, JWTs, role checks) is implemented.
+
+Alright, Daniel — this looks like a classic, well-scoped CS project. I've read the Product Requirements Document (PRD)[cite: 1] and translated it into a focused, Java-first implementation plan that fits your goal of a full-stack (backend + database + desktop client) portfolio project.
+
+This plan is explicitly Java-only (no Python options). It assumes a Spring Boot backend and a JavaFX or Swing desktop GUI. The document breaks the work into phases with concrete tasks and acceptance criteria.
+
 ## High-level contract
 - Inputs: user actions from the desktop client (register, login, search, add-to-cart, place order, manager actions).
 - Outputs: REST API responses (JSON), emails for order receipts, persistent data in MySQL.
@@ -11,7 +24,7 @@ This plan omits Python options and assumes a Java stack (Spring Boot backend + J
 ## Phase 0: Setup, Design, and Tech Stack Choice
 
 1. Choose your tech stack (Java-only):
-   - Backend: Java with Spring Boot (RESTful API, embedded Tomcat, ease of dependency management via Maven/Gradle).
+   - Backend: Java with Spring Boot (RESTful API, embedded Tomcat, easy dependency management via Maven or Gradle).
    - Frontend (desktop client): JavaFX (recommended) or Swing for the GUI.
    - Database: MySQL (as specified in PRD)[cite: 27].
 
@@ -46,7 +59,34 @@ This plan omits Python options and assumes a Java stack (Spring Boot backend + J
    - Initialize Git repo (if not already done).
    - Install Java 17+ (OpenJDK recommended), Maven or Gradle, MySQL server.
    - Create a database schema in MySQL and add seed data to `Books` for testing[cite: 37].
-   - Add a `.env` or application.properties file to hold DB credentials locally (don't commit secrets).
+   - Add a `.env` or `application.properties` file to hold DB credentials locally (don't commit secrets).
+
+### Build tool: Do we have to use Maven? What is Maven?
+
+Short answer: No, you don't have to use Maven — but it's the most common and beginner-friendly choice. Gradle is the other popular alternative. Both are modern build tools that handle dependencies, compilation, testing, packaging, and plugins.
+
+What Maven is (brief):
+- Maven is a build automation and dependency management tool for Java projects. It uses a declarative XML file called `pom.xml` to describe the project, dependencies (libraries), build lifecycle (compile, test, package), and plugins (for running Spring Boot, creating JARs, etc.).
+- Key benefits:
+  - Declarative dependency management (resolve transitive libraries automatically).
+  - Standardized lifecycle (clean, compile, test, package, install, deploy).
+  - Large plugin ecosystem (Spring Boot plugin, JavaFX packaging, jlink/jpackage, etc.).
+
+Alternatives:
+- Gradle: uses a Groovy or Kotlin DSL, generally faster and more flexible. Many teams prefer it for performance and expressive build scripts.
+- Ant + Ivy: older; more manual; rarely recommended for new projects.
+- Manual javac/jar classpath management: possible for tiny projects but becomes unmanageable quickly.
+
+When to pick which:
+- Use Maven if you want convention, wide documentation, and simple XML configuration. It's great for learning and standard projects.
+- Use Gradle if you want faster incremental builds, more concise scripts, and advanced customization.
+
+Common Maven commands you'll see in docs (for reference):
+- `mvn -v` (shows Maven version)
+- `mvn clean package` (builds and packages the app into a JAR/WAR)
+- `mvn spring-boot:run` (run a Spring Boot app in development)
+
+If you'd like, I can scaffold a Maven `pom.xml` and a Spring Boot project structure for you. Or I can scaffold a Gradle build instead — tell me which you prefer.
 
 ## Phase 1: Backend (RESTful API) Development
 

@@ -2,18 +2,22 @@
 # by Maven or Gradle. Use the project's build file (pom.xml or build.gradle)
 # to declare dependencies. Below are suggested Maven coordinates you can add
 # to your `pom.xml` dependencies section as a reference.
+This project uses Maven for dependency and build management. See `pom.xml` for the
+full list of runtime and test dependencies (Spring Boot starters, MySQL driver,
+JWT libs, Lombok, etc.).
 
-# spring-boot-starter-web
-org.springframework.boot:spring-boot-starter-web:3.0.0
-# spring-boot-starter-data-jpa
-org.springframework.boot:spring-boot-starter-data-jpa:3.0.0
-# MySQL connector
-mysql:mysql-connector-java:8.0.33
-# Spring Security / JWT support (or use jjwt)
-org.springframework.boot:spring-boot-starter-security:3.0.0
-io.jsonwebtoken:jjwt-api:0.11.5
-# JavaMail (for email)
-org.springframework.boot:spring-boot-starter-mail:3.0.0
+Useful commands:
 
-# If you want me to actually scaffold a Maven project (pom.xml + src/...), tell me
-# and I'll create it with these dependencies pinned to workable versions.
+```bash
+# build and run tests
+mvn clean package
+
+# run the app (development)
+mvn spring-boot:run
+
+# run tests only
+mvn test
+```
+
+If you'd prefer a Gradle build instead of Maven, I can add a `build.gradle` and
+convert the dependency declarations.

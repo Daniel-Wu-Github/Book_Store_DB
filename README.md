@@ -1,21 +1,41 @@
-# Book Store DB — Project Plan (Java stack)
+# Book Store DB — Project Plan & Maven scaffold (Java stack)
 
-This repository contains planning files and scaffolding notes for the Book Store DB project. The chosen stack for this plan is Java (Spring Boot backend + JavaFX desktop client) with MySQL as the database.
+This repository contains planning files and a starter Maven scaffold for the Book Store DB project.
 
 What's included:
 - `PLAN.md` — Detailed project plan and phased roadmap (Java-first).
+- `pom.xml` — Maven build file with Spring Boot starters and recommended plugins (scaffolded).
 - `.gitignore` — Standard Java/Maven/IDE ignores.
-- `requirements.txt` — Placeholder (Java projects typically use Maven/Gradle; see notes below).
+- `requirements.txt` — Notes about build and runtime dependencies (Java-focused).
 
-Getting started (local dev):
+Quick prerequisites
 
 1. Install Java 17 or later (OpenJDK recommended).
-2. Install Maven or Gradle. The plan assumes Maven but you can use Gradle if you prefer.
+2. Install Maven (or Gradle if you prefer; this repo currently includes a Maven `pom.xml`).
 3. Install MySQL and create a database for the project.
-4. Use `application.properties` (or environment variables) to configure DB credentials and JWT secrets. Do NOT commit secrets to the repo.
 
-Recommended next steps:
-1. Scaffold a Spring Boot project (Maven) with dependencies: spring-boot-starter-web, spring-boot-starter-data-jpa, spring-boot-starter-security, mysql-connector-j, jjwt (or spring-security-oauth2-jose), spring-boot-starter-mail.
-2. Scaffold a JavaFX client module that authenticates and calls the REST API.
+How to build and run the backend (development)
 
-If you'd like, I can scaffold the Maven project with the starter dependencies and create an initial `User` model + auth endpoints.
+1. Build the project and run tests:
+
+```bash
+mvn clean package
+```
+
+2. Run the Spring Boot app in development:
+
+```bash
+mvn spring-boot:run
+```
+
+3. The app will read DB credentials and secrets from `src/main/resources/application.properties` or environment variables. Do NOT commit real secrets to git.
+
+Notes
+
+- The provided `pom.xml` includes common Spring Boot starters (web, data-jpa, security, mail), JWT libs (jjwt) and Lombok configuration. You can switch to Spring Security's resource-server / jose modules later if you prefer tighter framework integration for JWTs.
+- If you want a Gradle build instead, tell me and I'll convert the POM to `build.gradle`.
+
+Next steps I can take for you
+
+- Scaffold a minimal Spring Boot app (User entity, repository, auth controller) and seed data.
+- Or scaffold a JavaFX client that connects to the API.
