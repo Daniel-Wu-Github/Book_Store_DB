@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.BooksController" spacing="10">
+    <padding>
+        <Insets top="10" left="10" right="10" bottom="10"/>
+    </padding>
+    <children>
+        <HBox spacing="10">
+            <children>
+                <TextField fx:id="searchField" promptText="Search books..."/>
+                <Button text="Search" onAction="#onSearch"/>
+            </children>
+        </HBox>
+        <TableView fx:id="booksTable" prefHeight="260">
+            <columns>
+                <TableColumn fx:id="titleCol" text="Title" prefWidth="200"/>
+                <TableColumn fx:id="authorCol" text="Author" prefWidth="160"/>
+                <TableColumn fx:id="priceCol" text="Price" prefWidth="80"/>
+            </columns>
+        </TableView>
+        <TitledPane text="Cart" expanded="true">
+            <content>
+                <VBox spacing="6">
+                    <padding>
+                        <Insets top="8" left="8" right="8" bottom="8"/>
+                    </padding>
+                    <HBox spacing="8">
+                        <children>
+                            <Label text="Quantity:"/>
+                            <Spinner fx:id="qtySpinner" editable="true"/>
+                            <Label text="Type:"/>
+                            <ComboBox fx:id="typeCombo"/>
+                            <Label text="Rental days:"/>
+                            <TextField fx:id="rentalDaysField" promptText="optional for RENT"/>
+                            <Button text="Add Selected" onAction="#onAddSelected"/>
+                        </children>
+                    </HBox>
+                    <TableView fx:id="cartTable" prefHeight="200">
+                        <columns>
+                            <TableColumn fx:id="cartTitleCol" text="Title" prefWidth="220"/>
+                            <TableColumn fx:id="cartTypeCol" text="Type" prefWidth="80"/>
+                            <TableColumn fx:id="cartQtyCol" text="Qty" prefWidth="60"/>
+                            <TableColumn fx:id="cartRentalCol" text="Rental Days" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <children>
+                            <Button text="Remove Selected" onAction="#onRemoveSelected"/>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <Button text="Place Order" onAction="#onPlaceOrder"/>
+                        </children>
+                    </HBox>
+                    <Label fx:id="statusLabel" textFill="red"/>
+                </VBox>
+            </content>
+        </TitledPane>
+    </children>
+</VBox>

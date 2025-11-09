@@ -1,7 +1,6 @@
 package com.bookstore.init;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.core.env.Environment;
@@ -12,7 +11,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-@Profile("dev")
 public class DefaultBooks implements CommandLineRunner {
 
     private final JdbcTemplate jdbc;

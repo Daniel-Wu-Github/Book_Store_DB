@@ -1,0 +1,12 @@
+com/bookstore/fx/controller/AdminController.class
+com/bookstore/fx/api/ApiClient.class
+com/bookstore/fx/controller/BooksController.class
+com/bookstore/fx/core/SceneRouter.class
+com/bookstore/fx/controller/MainController.class
+com/bookstore/fx/controller/RegisterController.class
+com/bookstore/fx/api/ApiClient$2.class
+com/bookstore/fx/api/ApiClient$1.class
+com/bookstore/fx/App.class
+com/bookstore/fx/controller/LoginController.class
+com/bookstore/fx/api/ApiClient$3.class
+com/bookstore/fx/api/ApiClient$4.class

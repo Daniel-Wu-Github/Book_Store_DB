@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.LoginController" spacing="10" alignment="CENTER" stylesheets="/styles/app.css">
+    <children>
+        <Label text="Bookstore Login" styleClass="title"/>
+        <TextField fx:id="usernameField" promptText="Username"/>
+        <PasswordField fx:id="passwordField" promptText="Password"/>
+        <HBox spacing="10">
+            <children>
+                <Button text="Login" onAction="#onLogin"/>
+                <Button text="Register" onAction="#goRegister"/>
+            </children>
+        </HBox>
+        <Label fx:id="statusLabel" textFill="red"/>
+    </children>
+    <padding><Insets top="20" left="40" right="40" bottom="20"/></padding>
+</VBox>

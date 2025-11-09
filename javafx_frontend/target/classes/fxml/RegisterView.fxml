@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.RegisterController" spacing="10" alignment="CENTER">
+    <children>
+        <Label text="Create Account" styleClass="title"/>
+        <TextField fx:id="usernameField" promptText="Username"/>
+        <TextField fx:id="emailField" promptText="Email"/>
+        <PasswordField fx:id="passwordField" promptText="Password"/>
+        <HBox spacing="10">
+            <children>
+                <Button text="Submit" onAction="#onRegister"/>
+                <Button text="Back" onAction="#goBack"/>
+            </children>
+        </HBox>
+        <Label fx:id="statusLabel" textFill="red"/>
+    </children>
+    <padding><Insets top="20" left="40" right="40" bottom="20"/></padding>
+</VBox>

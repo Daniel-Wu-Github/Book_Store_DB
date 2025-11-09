@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.MainController">
+    <top>
+        <ToolBar>
+            <items>
+                <Label text="Bookstore" styleClass="title"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statusLabel" text="Loading user..."/>
+                <Button text="Logout" onAction="#onLogout"/>
+            </items>
+        </ToolBar>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane">
+            <tabs>
+                <Tab text="Books" closable="false">
+                    <content>
+                        <fx:include source="/fxml/BooksView.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="adminTab" text="Admin" closable="false" disable="true">
+                    <content>
+                        <fx:include source="/fxml/AdminView.fxml"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

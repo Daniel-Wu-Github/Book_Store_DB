@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -48,12 +49,14 @@ public class BookController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public ResponseEntity<BookDto> create(@Valid @RequestBody CreateBookRequest req) {
         Book b = bookService.create(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(BookDto.fromEntity(b));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public ResponseEntity<BookDto> update(@PathVariable Long id, @Valid @RequestBody UpdateBookRequest req) {
         return bookService.update(id, req)
                 .map(BookDto::fromEntity)
@@ -62,6 +65,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         boolean deleted = bookService.delete(id);
         if (!deleted) return ResponseEntity.notFound().build();
