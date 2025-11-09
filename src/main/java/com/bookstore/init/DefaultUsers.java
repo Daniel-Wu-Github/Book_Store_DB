@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.core.env.Environment;
+import com.bookstore.model.User;
+import com.bookstore.repository.UserRepository;
 
 @Component
 @Profile("dev")
@@ -12,15 +15,41 @@ public class DefaultUsers implements CommandLineRunner {
 
     private final JdbcTemplate jdbc;
     private final PasswordEncoder passwordEncoder;
+    private final Environment env;
+    private final UserRepository userRepository;
 
-    public DefaultUsers(JdbcTemplate jdbc, PasswordEncoder passwordEncoder) {
+    public DefaultUsers(JdbcTemplate jdbc, PasswordEncoder passwordEncoder, Environment env, UserRepository userRepository) {
         this.jdbc = jdbc;
         this.passwordEncoder = passwordEncoder;
+        this.env = env;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        // Create users table if it doesn't exist
+        String url = env.getProperty("spring.datasource.url", "");
+        boolean isH2 = url.startsWith("jdbc:h2:");
+
+        if (isH2) {
+            if (userRepository.count() > 0) {
+                System.out.println("DefaultUsers: users table already has data (count=" + userRepository.count() + ")");
+            } else {
+                System.out.println("DefaultUsers: seeding default users via JPA repository...");
+                String rawPassword = "admin";
+                String encoded = passwordEncoder.encode(rawPassword);
+                User admin = new User();
+                admin.setUsername("admin");
+                admin.setPassword(encoded);
+                admin.setEmail("admin@example.com");
+                admin.setRoles("ROLE_ADMIN,ROLE_USER");
+                admin.setEnabled(true);
+                userRepository.save(admin);
+                System.out.println("DefaultUsers: ensured admin user exists (username=admin)");
+            }
+            return;
+        }
+
+        // Create users table if it doesn't exist (MySQL-specific DDL)
         jdbc.execute("CREATE TABLE IF NOT EXISTS users ("
                 + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "username VARCHAR(100) NOT NULL,"
@@ -38,7 +67,6 @@ public class DefaultUsers implements CommandLineRunner {
         Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
         if (count != null && count > 0) {
             System.out.println("DefaultUsers: users table already has data (count=" + count + ")");
-            // Still ensure admin exists/updated: we'll upsert using ON DUPLICATE KEY UPDATE
         } else {
             System.out.println("DefaultUsers: users table created (if it did not exist)");
         }

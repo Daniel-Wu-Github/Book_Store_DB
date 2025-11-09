@@ -4,6 +4,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.core.env.Environment;
+import com.bookstore.model.Book;
+import com.bookstore.repository.BookRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,14 +16,38 @@ import java.util.List;
 public class DefaultBooks implements CommandLineRunner {
 
     private final JdbcTemplate jdbc;
+    private final Environment env;
+    private final BookRepository bookRepository;
 
-    public DefaultBooks(JdbcTemplate jdbc) {
+    public DefaultBooks(JdbcTemplate jdbc, Environment env, BookRepository bookRepository) {
         this.jdbc = jdbc;
+        this.env = env;
+        this.bookRepository = bookRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        // Create table if it doesn't exist (matches the JPA entity)
+        String url = env.getProperty("spring.datasource.url", "");
+        boolean isH2 = url.startsWith("jdbc:h2:");
+
+        if (isH2) {
+            // Let Hibernate create schema; use repository-based seeding to avoid DB-specific DDL
+            if (bookRepository.count() > 0) {
+                System.out.println("DefaultBooks: books table already has data (count=" + bookRepository.count() + ")");
+                return;
+            }
+            System.out.println("DefaultBooks: seeding default books via JPA repository...");
+            List<Book> rows = List.of(
+                    createBook("Effective Java", "Joshua Bloch", "978-0134685991", new BigDecimal("45.00"), 10, "Best practices for Java"),
+                    createBook("Clean Code", "Robert C. Martin", "978-0132350884", new BigDecimal("40.00"), 7, "A Handbook of Agile Software Craftsmanship"),
+                    createBook("Design Patterns", "Erich Gamma et al.", "978-0201633610", new BigDecimal("55.00"), 5, "Classic design patterns")
+            );
+            bookRepository.saveAll(rows);
+            System.out.println("DefaultBooks: inserted/updated " + rows.size() + " books.");
+            return;
+        }
+
+        // Fallback: run MySQL-compatible DDL and idempotent inserts
         jdbc.execute("CREATE TABLE IF NOT EXISTS books ("
                 + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "title VARCHAR(255) NOT NULL,"
@@ -59,5 +86,16 @@ public class DefaultBooks implements CommandLineRunner {
         }
 
         System.out.println("DefaultBooks: inserted/updated " + rows.size() + " books.");
+    }
+
+    private Book createBook(String title, String author, String isbn, BigDecimal price, int stock, String desc) {
+        Book b = new Book();
+        b.setTitle(title);
+        b.setAuthor(author);
+        b.setIsbn(isbn);
+        b.setPrice(price);
+        b.setStock(stock);
+        b.setDescription(desc);
+        return b;
     }
 }
