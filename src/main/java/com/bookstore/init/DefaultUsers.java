@@ -31,21 +31,27 @@ public class DefaultUsers implements CommandLineRunner {
         boolean isH2 = url.startsWith("jdbc:h2:");
 
         if (isH2) {
-            if (userRepository.count() > 0) {
-                System.out.println("DefaultUsers: users table already has data (count=" + userRepository.count() + ")");
-            } else {
-                System.out.println("DefaultUsers: seeding default users via JPA repository...");
-                String rawPassword = "admin";
-                String encoded = passwordEncoder.encode(rawPassword);
-                User admin = new User();
-                admin.setUsername("admin");
-                admin.setPassword(encoded);
-                admin.setEmail("admin@example.com");
-                admin.setRoles("ROLE_ADMIN,ROLE_USER");
-                admin.setEnabled(true);
-                userRepository.save(admin);
-                System.out.println("DefaultUsers: ensured admin user exists (username=admin)");
+            try {
+                Long existing = userRepository.count();
+                if (existing != null && existing > 0) {
+                    System.out.println("DefaultUsers: users table already has data (count=" + existing + ")");
+                    return;
+                }
+            } catch (Exception ex) {
+                // Table may not yet exist or schema generation ordering caused an issue — we'll attempt to seed anyway
+                System.out.println("DefaultUsers: could not determine users count (will attempt to seed): " + ex.getMessage());
             }
+            System.out.println("DefaultUsers: seeding default users via JPA repository...");
+            String rawPassword = "admin";
+            String encoded = passwordEncoder.encode(rawPassword);
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(encoded);
+            admin.setEmail("admin@example.com");
+            admin.setRoles("ROLE_ADMIN,ROLE_USER");
+            admin.setEnabled(true);
+            userRepository.save(admin);
+            System.out.println("DefaultUsers: ensured admin user exists (username=admin)");
             return;
         }
 

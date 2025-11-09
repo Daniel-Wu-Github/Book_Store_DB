@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class AdminOrderController {
     return ResponseEntity.ok(list);
     }
 
-    @PatchMapping("/{id}/payment")
+    @RequestMapping(path = "/{id}/payment", method = {RequestMethod.PATCH, RequestMethod.POST})
     public ResponseEntity<?> updatePayment(@PathVariable Long id, @RequestParam PaymentStatus status) {
         return orderRepository.findById(id).map(o -> {
             o.setPaymentStatus(status);
@@ -43,7 +44,7 @@ public class AdminOrderController {
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/{id}/status")
+    @RequestMapping(path = "/{id}/status", method = {RequestMethod.PATCH, RequestMethod.POST})
     public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam OrderStatus status) {
         return orderRepository.findById(id).map(o -> {
             o.setOrderStatus(status);

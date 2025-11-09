@@ -32,9 +32,15 @@ public class DefaultBooks implements CommandLineRunner {
 
         if (isH2) {
             // Let Hibernate create schema; use repository-based seeding to avoid DB-specific DDL
-            if (bookRepository.count() > 0) {
-                System.out.println("DefaultBooks: books table already has data (count=" + bookRepository.count() + ")");
-                return;
+            try {
+                Long existing = bookRepository.count();
+                if (existing != null && existing > 0) {
+                    System.out.println("DefaultBooks: books table already has data (count=" + existing + ")");
+                    return;
+                }
+            } catch (Exception ex) {
+                // Table may not yet exist or schema generation ordering caused an issue — we'll attempt to seed anyway
+                System.out.println("DefaultBooks: could not determine books count (will attempt to seed): " + ex.getMessage());
             }
             System.out.println("DefaultBooks: seeding default books via JPA repository...");
             List<Book> rows = List.of(

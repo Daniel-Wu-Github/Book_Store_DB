@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Profile("dev")
+@Profile({"dev","test"})
 public class DevEmailService implements EmailService {
     private static final Logger log = LoggerFactory.getLogger(DevEmailService.class);
 

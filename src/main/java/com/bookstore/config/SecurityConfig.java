@@ -14,6 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @Profile("!dev")
+@org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Bean

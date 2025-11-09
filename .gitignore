@@ -56,3 +56,6 @@ Thumbs.db
 
 # Environment files
 .env
+
+#everything in the lib directory
+/lib/

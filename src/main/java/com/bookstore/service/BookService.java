@@ -6,10 +6,15 @@ import com.bookstore.model.Book;
 import com.bookstore.repository.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.util.StringUtils;
+
 import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -22,6 +27,32 @@ public class BookService {
 
     public Page<Book> list(Pageable pageable) {
         return bookRepository.findAll(pageable);
+    }
+
+    public Page<Book> search(String q, String title, String author, Pageable pageable) {
+        // naive in-memory filtering as a minimal implementation; for production, add repository methods
+        List<Book> all = bookRepository.findAll();
+        String qn = StringUtils.hasText(q) ? q.toLowerCase() : null;
+        String tn = StringUtils.hasText(title) ? title.toLowerCase() : null;
+        String an = StringUtils.hasText(author) ? author.toLowerCase() : null;
+        List<Book> filtered = all.stream().filter(b -> {
+            boolean ok = true;
+            if (qn != null) {
+                ok &= (b.getTitle() != null && b.getTitle().toLowerCase().contains(qn)) ||
+                      (b.getAuthor() != null && b.getAuthor().toLowerCase().contains(qn));
+            }
+            if (tn != null) {
+                ok &= (b.getTitle() != null && b.getTitle().toLowerCase().contains(tn));
+            }
+            if (an != null) {
+                ok &= (b.getAuthor() != null && b.getAuthor().toLowerCase().contains(an));
+            }
+            return ok;
+        }).collect(Collectors.toList());
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filtered.size());
+        List<Book> pageContent = start >= filtered.size() ? List.of() : filtered.subList(start, end);
+        return new PageImpl<>(pageContent, pageable, filtered.size());
     }
 
     public Optional<Book> getById(Long id) {

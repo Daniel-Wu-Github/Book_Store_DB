@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
@@ -26,6 +27,15 @@ public class BookController {
     @GetMapping
     public Page<BookDto> list(Pageable pageable) {
         Page<Book> p = bookService.list(pageable);
+        return p.map(BookDto::fromEntity);
+    }
+
+    @GetMapping("/search")
+    public Page<BookDto> search(@RequestParam(name = "q", required = false) String q,
+                                @RequestParam(name = "title", required = false) String title,
+                                @RequestParam(name = "author", required = false) String author,
+                                Pageable pageable) {
+        Page<Book> p = bookService.search(q, title, author, pageable);
         return p.map(BookDto::fromEntity);
     }
 
