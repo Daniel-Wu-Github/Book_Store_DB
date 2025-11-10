@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.AdminController" spacing="10">
-    <padding>
-        <Insets top="10" left="10" right="10" bottom="10"/>
-    </padding>
-    <children>
-        <Label text="Admin — Orders" styleClass="title"/>
-        <TableView fx:id="ordersTable" prefHeight="360">
-            <columns>
-                <TableColumn fx:id="idCol" text="ID" prefWidth="60"/>
-                <TableColumn fx:id="userCol" text="User" prefWidth="120"/>
-                <TableColumn fx:id="totalCol" text="Total" prefWidth="100"/>
-                <TableColumn fx:id="paymentCol" text="Payment" prefWidth="120"/>
-                <TableColumn fx:id="statusCol" text="Status" prefWidth="120"/>
-            </columns>
-        </TableView>
-        <HBox spacing="10">
-            <children>
-                <Button text="Refresh" onAction="#onRefresh"/>
-                <Button text="Mark Payment PAID" onAction="#onMarkPaid"/>
-                <Label fx:id="statusLabel"/>
-            </children>
-        </HBox>
-    </children>
-</VBox>
+<TabPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml">
+    <tabs>
+        <Tab text="Orders" closable="false">
+            <content>
+                <fx:include source="/fxml/AdminOrdersView.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="Users" closable="false">
+            <content>
+                <fx:include source="/fxml/AdminUsersView.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="Books" closable="false">
+            <content>
+                <fx:include source="/fxml/AdminBooksView.fxml"/>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

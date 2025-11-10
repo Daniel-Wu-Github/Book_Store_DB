@@ -25,6 +25,11 @@ public class DefaultBooks implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Allow disabling seeds via config: app.seed.enabled=false
+        if (!Boolean.parseBoolean(env.getProperty("app.seed.enabled", "true"))) {
+            System.out.println("DefaultBooks: seeding disabled by property app.seed.enabled=false");
+            return;
+        }
         String url = env.getProperty("spring.datasource.url", "");
         boolean isH2 = url.startsWith("jdbc:h2:");
 
@@ -51,7 +56,7 @@ public class DefaultBooks implements CommandLineRunner {
             return;
         }
 
-        // Fallback: run MySQL-compatible DDL and idempotent inserts
+    // Fallback: run MySQL-compatible DDL and seed ONLY if table empty (do not overwrite)
         jdbc.execute("CREATE TABLE IF NOT EXISTS books ("
                 + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "title VARCHAR(255) NOT NULL,"
@@ -72,7 +77,7 @@ public class DefaultBooks implements CommandLineRunner {
             return;
         }
 
-        System.out.println("DefaultBooks: seeding default books...");
+    System.out.println("DefaultBooks: seeding default books...");
 
         List<Object[]> rows = List.of(
                 new Object[]{"Effective Java", "Joshua Bloch", "978-0134685991", new BigDecimal("45.00"), 10, "Best practices for Java"},
@@ -80,14 +85,11 @@ public class DefaultBooks implements CommandLineRunner {
                 new Object[]{"Design Patterns", "Erich Gamma et al.", "978-0201633610", new BigDecimal("55.00"), 5, "Classic design patterns"}
         );
 
-        // Use ON DUPLICATE KEY UPDATE so seeding is idempotent (unique index on isbn)
-        String insertSql = "INSERT INTO books (title, author, isbn, price, stock, description, created_at, updated_at, version) "
-                + "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), 0) "
-                + "ON DUPLICATE KEY UPDATE title=VALUES(title), author=VALUES(author), price=VALUES(price), stock=VALUES(stock), description=VALUES(description), updated_at=NOW()";
+    // Insert only if not existing (do not modify existing rows)
+    String insertSql = "INSERT IGNORE INTO books (title, author, isbn, price, stock, description, created_at, updated_at, version) "
+        + "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), 0)";
 
-        for (Object[] r : rows) {
-            jdbc.update(insertSql, r);
-        }
+    for (Object[] r : rows) { jdbc.update(insertSql, r); }
 
         System.out.println("DefaultBooks: inserted/updated " + rows.size() + " books.");
     }

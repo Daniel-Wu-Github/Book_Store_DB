@@ -25,6 +25,11 @@ public class DefaultUsers implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Allow disabling seeds via config: app.seed.enabled=false
+        if (!Boolean.parseBoolean(env.getProperty("app.seed.enabled", "true"))) {
+            System.out.println("DefaultUsers: seeding disabled by property app.seed.enabled=false");
+            return;
+        }
         String url = env.getProperty("spring.datasource.url", "");
         boolean isH2 = url.startsWith("jdbc:h2:");
 
@@ -75,15 +80,20 @@ public class DefaultUsers implements CommandLineRunner {
             System.out.println("DefaultUsers: users table created (if it did not exist)");
         }
 
-        // Seed an admin user (idempotent)
-        String rawPassword = "admin"; // dev password
-        String encoded = passwordEncoder.encode(rawPassword);
-        String insertSql = "INSERT INTO users (username, password, email, roles, enabled, created_at, updated_at, version) "
-                + "VALUES (?, ?, ?, ?, ?, NOW(), NOW(), 0) "
-                + "ON DUPLICATE KEY UPDATE password=VALUES(password), email=VALUES(email), roles=VALUES(roles), enabled=VALUES(enabled), updated_at=NOW()";
-
-        jdbc.update(insertSql, "admin", encoded, "admin@example.com", "ROLE_ADMIN,ROLE_USER", true);
-
-        System.out.println("DefaultUsers: ensured admin user exists (username=admin)");
+        // Only create the default admin user if it does not already exist; do NOT overwrite changes
+        if (!userRepository.existsByUsername("admin")) {
+            String rawPassword = "admin"; // dev password
+            String encoded = passwordEncoder.encode(rawPassword);
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(encoded);
+            admin.setEmail("admin@example.com");
+            admin.setRoles("ROLE_ADMIN,ROLE_USER");
+            admin.setEnabled(true);
+            userRepository.save(admin);
+            System.out.println("DefaultUsers: created default admin user (username=admin)");
+        } else {
+            System.out.println("DefaultUsers: admin user already exists; not modifying existing data");
+        }
     }
 }

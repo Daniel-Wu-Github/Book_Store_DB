@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bookstore.fx.controller.AdminController" spacing="8">
+    <padding><Insets top="8" left="8" right="8" bottom="8"/></padding>
+    <children>
+        <HBox spacing="8">
+            <children>
+                <Button text="Refresh" onAction="#onRefreshUsers"/>
+                <Button text="New User" onAction="#onNewUser"/>
+                <Button text="Delete User" onAction="#onDeleteUser"/>
+                <Label fx:id="usersStatus"/>
+            </children>
+        </HBox>
+        <TableView fx:id="usersTable" prefHeight="360">
+            <columns>
+                <TableColumn fx:id="uIdCol" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="uNameCol" text="Username" prefWidth="120"/>
+                <TableColumn fx:id="uEmailCol" text="Email" prefWidth="180"/>
+                <TableColumn fx:id="uRolesCol" text="Roles" prefWidth="180"/>
+                <TableColumn fx:id="uEnabledCol" text="Enabled" prefWidth="80"/>
+            </columns>
+        </TableView>
+    </children>
+</VBox>
