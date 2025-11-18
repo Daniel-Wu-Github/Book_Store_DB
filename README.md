@@ -14,6 +14,17 @@ Quick prerequisites
 2. Install Maven (or Gradle if you prefer; this repo currently includes a Maven `pom.xml`).
 3. Install MySQL and create a database for the project.
 
+Run helper (`run.sh`)
+---------------------
+
+This project includes a `run.sh` helper in the repository root that starts the backend and the JavaFX frontend together. Highlights:
+
+- `run.sh` sources `.env` (if present) but preserves any environment variables you pass on the command line. Example: `APP_SEED_ENABLED=true ./run.sh`.
+- Before starting the backend it performs a MySQL preflight check over TCP (uses `mysql --protocol=TCP` if the client is available). If TCP/auth fails the script exits with actionable SQL hints.
+- Logs are written to `run-logs/backend.log` and `run-logs/frontend.log`, and `run.sh` tails them for convenience.
+
+This helper is convenient for development; see `runapp.md` for full run instructions and troubleshooting.
+
 How to build and run the backend (development)
 
 1. Build the project and run tests:

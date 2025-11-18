@@ -71,6 +71,38 @@ public class DefaultBooks implements CommandLineRunner {
                 + "UNIQUE KEY idx_books_isbn (isbn)"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
+        // Ensure orders and order_items tables exist for MySQL path so Hibernate/JPA can persist orders
+        jdbc.execute("CREATE TABLE IF NOT EXISTS orders ("
+            + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+            + "user_id BIGINT NOT NULL,"
+            + "total_amount DECIMAL(19,2) NOT NULL DEFAULT 0.00,"
+            + "order_status VARCHAR(50) NOT NULL DEFAULT 'PENDING',"
+            + "payment_status VARCHAR(50) NOT NULL DEFAULT 'PENDING',"
+            + "created_at DATETIME NOT NULL,"
+            + "updated_at DATETIME NULL,"
+            + "version BIGINT,"
+            + "INDEX idx_orders_user (user_id),"
+            + "CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE"
+            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        jdbc.execute("CREATE TABLE IF NOT EXISTS order_items ("
+            + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+            + "order_id BIGINT NOT NULL,"
+            + "book_id BIGINT NOT NULL,"
+            + "quantity INT NOT NULL DEFAULT 1,"
+            + "unit_price DECIMAL(19,2) NOT NULL DEFAULT 0.00,"
+            + "subtotal DECIMAL(19,2) NOT NULL DEFAULT 0.00,"
+            + "item_type VARCHAR(50) NOT NULL DEFAULT 'BUY',"
+            + "rental_days INT NULL,"
+            + "created_at DATETIME NOT NULL,"
+            + "updated_at DATETIME NULL,"
+            + "version BIGINT,"
+            + "INDEX idx_order_items_order (order_id),"
+            + "INDEX idx_order_items_book (book_id),"
+            + "CONSTRAINT fk_order_items_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,"
+            + "CONSTRAINT fk_order_items_book FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE RESTRICT ON UPDATE CASCADE"
+            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
         Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM books", Integer.class);
         if (count != null && count > 0) {
             System.out.println("DefaultBooks: books table already has data (count=" + count + ")");

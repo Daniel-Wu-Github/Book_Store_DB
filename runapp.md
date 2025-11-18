@@ -1,15 +1,19 @@
 # Run the Book Store App (backend + JavaFX frontend)
 
-This file lists the common commands and environment variables you can use to run the backend and the JavaFX frontend from this repository. Pick the variant you want (dev in-memory H2, file-based H2, or persistent MySQL).
+This file documents up-to-date commands and environment variables to run the backend and the JavaFX frontend. It also describes the `run.sh` helper that starts both services and performs a MySQL preflight check (TCP + auth) so failures are detected early.
 
 ## Prereqs
-- Java 17+ and Maven installed
-- (Optional) MySQL server if you want persistent DB storage
+- Java 11+ (project compiled with Java 11) and Maven installed
+- MySQL server for persistent DB storage (or use H2 alternatives below)
 - For JavaFX frontend on WSL: a working X server or run on a native Linux/GUI environment. Export `DISPLAY` and make sure GTK/OpenGL libraries are available.
 
 Repository layout (relevant):
 - project root: contains backend Spring Boot app and `pom.xml`
 - `javafx_frontend/` (module) contains the JavaFX client (run with `mvn javafx:run` inside that module)
+
+Files of interest:
+- `run.sh` — helper script that starts backend + frontend, preserves environment overrides, performs a TCP+auth MySQL preflight, and tails logs in `run-logs/`.
+- `.env` — recommended place for local DB credentials (sourced by `run.sh`, but command-line env vars override `.env`).
 
 ---
 
@@ -33,6 +37,9 @@ Use this when you want persistence across restarts.
 
 ```bash
 # Example: export DB credentials then run
+export BOOK_DB_HOST=127.0.0.1
+export BOOK_DB_PORT=3306
+export BOOK_DB_NAME=bookstore
 export BOOK_DB_USER=book_user
 export BOOK_DB_PASS=your_mysql_password
 # Optionally disable seeders so they don't run every startup (recommended after initial seeding)
@@ -103,17 +110,39 @@ export DISPLAY=localhost:0.0
 ```bash
 # check health / sample endpoints
 curl -s http://localhost:8080/api/books | jq '.'
-curl -s http://localhost:8080/auth/me
+curl -s http://localhost:8080/api/auth/me
 ```
 
 ---
 
 ### 7) Troubleshooting & tips
-- If your data keeps “disappearing”, confirm which profile you started with:
-	- `SPRING_PROFILES_ACTIVE=dev` -> in-memory H2 (ephemeral)
-	- no dev profile -> uses MySQL (persistent)
-- To stop seeders from running each start, set `APP_SEED_ENABLED=false` or `--app.seed.enabled=false`.
-- Consider adding Flyway/Liquibase migrations for deterministic schema management instead of runtime seeders.
+
+Important notes about `run.sh` and MySQL:
+
+- `run.sh` now preserves any environment variables you set on the command line (for example `APP_SEED_ENABLED=true ./run.sh` will be honored). `.env` is sourced but does not override already set env vars.
+- `run.sh` runs a MySQL preflight that:
+	- checks TCP reachability to `${BOOK_DB_HOST:-127.0.0.1}:${BOOK_DB_PORT:-3306}`
+	- runs a `mysql --protocol=TCP` auth check using `BOOK_DB_USER` and `BOOK_DB_PASS` (if the mysql client exists)
+	- fails fast with actionable SQL statements if the auth check fails (CREATE/ALTER/GRANT examples)
+
+This preflight mirrors how the Spring Boot app connects (JDBC over TCP). If you previously saw a `mysql` client test succeed but the app failed, it was likely because the client connected over the Unix socket (when host is `localhost`) while the app used TCP — creating mismatched results. Use `127.0.0.1` for TCP to avoid socket vs TCP differences.
+
+To allow the app to seed (one-time) and then disable seeding, run:
+```bash
+# Run seeding once (force seeder execution)
+APP_SEED_ENABLED=true ./run.sh
+
+# After seed completes, set APP_SEED_ENABLED=false in .env
+```
+
+If you run into `ERROR 1045` (Access denied) or plugin mismatches, use `sudo mysql` (WSL) or run the MySQL admin flow and then run:
+```sql
+ALTER USER 'book_user'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'strong_password';
+ALTER USER 'book_user'@'127.0.0.1' IDENTIFIED WITH caching_sha2_password BY 'strong_password';
+FLUSH PRIVILEGES;
+```
+
+Log files: `run-logs/backend.log` and `run-logs/frontend.log` (tailing is handled by `run.sh`).
 
 ---
 
