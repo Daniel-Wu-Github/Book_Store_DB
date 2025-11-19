@@ -3,23 +3,33 @@ package com.bookstore.service;
 import com.bookstore.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@ConditionalOnProperty(name = "mail.smtp.enabled", havingValue = "false", matchIfMissing = true)
 public class DevEmailService implements EmailService {
     private static final Logger log = LoggerFactory.getLogger(DevEmailService.class);
 
     // Keep an in-memory list for debugging in dev
     private final List<String> sent = new ArrayList<>();
 
+    @Value("${mail.override.to:}")
+    private String overrideTo;
+
     @Override
     public void sendOrderConfirmation(Order order) {
         String body = buildBody(order);
         // In dev we just log and keep the message in memory
-        log.info("[DEV EMAIL] order confirmation for orderId={}\n{}", order.getId(), body);
+        if (overrideTo != null && !overrideTo.isBlank()) {
+            log.info("[DEV EMAIL] (override to {}) order confirmation for orderId={}\n{}", overrideTo, order.getId(), body);
+        } else {
+            log.info("[DEV EMAIL] order confirmation for orderId={}\n{}", order.getId(), body);
+        }
         sent.add(body);
     }
 

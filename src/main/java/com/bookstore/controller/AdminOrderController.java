@@ -22,11 +22,13 @@ public class AdminOrderController {
 
     private final OrderRepository orderRepository;
     private final OrderService orderService;
+    private final com.bookstore.service.EmailService emailService;
 
     @Autowired
-    public AdminOrderController(OrderRepository orderRepository, OrderService orderService) {
+    public AdminOrderController(OrderRepository orderRepository, OrderService orderService, com.bookstore.service.EmailService emailService) {
         this.orderRepository = orderRepository;
         this.orderService = orderService;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -39,6 +41,15 @@ public class AdminOrderController {
     public ResponseEntity<?> updatePayment(@PathVariable Long id, @RequestParam PaymentStatus status) {
         return orderRepository.findById(id).map(o -> {
             o.setPaymentStatus(status);
+            if (status == PaymentStatus.PAID && o.getOrderStatus() == OrderStatus.PENDING) {
+                o.setOrderStatus(OrderStatus.CONFIRMED);
+                try {
+                    emailService.sendOrderConfirmation(o);
+                    o.setEmailed(true);
+                } catch (Exception e) {
+                    // keep emailed=false on failure
+                }
+            }
             Order saved = orderRepository.save(o);
             return ResponseEntity.ok(orderService.toDto(saved));
         }).orElseGet(() -> ResponseEntity.notFound().build());
@@ -50,6 +61,20 @@ public class AdminOrderController {
             o.setOrderStatus(status);
             Order saved = orderRepository.save(o);
             return ResponseEntity.ok(orderService.toDto(saved));
+        }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/{id}/resend-email")
+    public ResponseEntity<?> resendEmail(@PathVariable Long id) {
+        return orderRepository.findById(id).map(o -> {
+            try {
+                emailService.sendOrderConfirmation(o);
+                o.setEmailed(true);
+                Order saved = orderRepository.save(o);
+                return ResponseEntity.ok(orderService.toDto(saved));
+            } catch (Exception e) {
+                return ResponseEntity.status(500).body("Failed to resend email: " + e.getMessage());
+            }
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

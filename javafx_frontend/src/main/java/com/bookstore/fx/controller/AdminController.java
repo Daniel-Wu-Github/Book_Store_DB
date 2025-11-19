@@ -16,6 +16,7 @@ public class AdminController {
     @FXML private TableColumn<Map<String,Object>, String> totalCol;
     @FXML private TableColumn<Map<String,Object>, String> paymentCol;
     @FXML private TableColumn<Map<String,Object>, String> statusCol;
+    @FXML private TableColumn<Map<String,Object>, Boolean> emailedCol;
     @FXML private Label statusLabel;
     // users
     @FXML private TableView<Map<String,Object>> usersTable;
@@ -48,6 +49,7 @@ public class AdminController {
             totalCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("totalAmount"))));
             paymentCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("paymentStatus"))));
             statusCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("orderStatus"))));
+            emailedCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>((Boolean)cd.getValue().getOrDefault("emailed", Boolean.FALSE)));
             ordersTable.setItems(ordersData);
         }
         if (statusLabel != null) statusLabel.setText("");
@@ -186,6 +188,31 @@ public class AdminController {
                 onRefresh();
             } else {
                 statusLabel.setText("Failed to mark paid");
+            }
+        } catch (Exception e) {
+            statusLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void onResendEmail() {
+        Map<String,Object> sel = ordersTable.getSelectionModel().getSelectedItem();
+        if (sel == null) {
+            statusLabel.setText("Select an order");
+            return;
+        }
+        Number id = num(sel.get("id"));
+        if (id == null) {
+            statusLabel.setText("Invalid ID");
+            return;
+        }
+        try {
+            boolean ok = api.adminResendOrderEmail(id.longValue());
+            if (ok) {
+                statusLabel.setText("Email resent");
+                onRefresh();
+            } else {
+                statusLabel.setText("Resend failed");
             }
         } catch (Exception e) {
             statusLabel.setText("Error: " + e.getMessage());

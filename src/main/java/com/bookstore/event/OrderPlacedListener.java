@@ -3,6 +3,8 @@ package com.bookstore.event;
 import com.bookstore.model.Order;
 import com.bookstore.repository.OrderRepository;
 import com.bookstore.service.EmailService;
+import com.bookstore.repository.OrderEmailAttemptRepository;
+import com.bookstore.model.OrderEmailAttempt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ public class OrderPlacedListener {
 
     private final OrderRepository orderRepository;
     private final EmailService emailService;
+    private final OrderEmailAttemptRepository attemptRepository;
 
     @Autowired
-    public OrderPlacedListener(OrderRepository orderRepository, EmailService emailService) {
+    public OrderPlacedListener(OrderRepository orderRepository, EmailService emailService, OrderEmailAttemptRepository attemptRepository) {
         this.orderRepository = orderRepository;
         this.emailService = emailService;
+        this.attemptRepository = attemptRepository;
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
@@ -34,8 +38,26 @@ public class OrderPlacedListener {
         }
         try {
             emailService.sendOrderConfirmation(order);
+            order.setEmailed(true);
+            orderRepository.save(order);
+            recordAttempt(id, true, null);
         } catch (Exception e) {
             log.error("failed to send order confirmation for orderId={}", id, e);
+            recordAttempt(id, false, e.getMessage());
+        }
+    }
+
+    private void recordAttempt(Long orderId, boolean success, String error) {
+        try {
+            OrderEmailAttempt a = new OrderEmailAttempt();
+            a.setOrderId(orderId);
+            a.setSuccess(success);
+            a.setErrorMessage(error);
+            a.setProvider("smtp");
+            a.setSentAt(java.time.Instant.now());
+            attemptRepository.save(a);
+        } catch (Exception ignore) {
+            // don't block on audit failures
         }
     }
 }

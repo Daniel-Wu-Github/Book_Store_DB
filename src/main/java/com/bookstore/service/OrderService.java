@@ -102,6 +102,7 @@ public class OrderService {
         dto.setOrderStatus(o.getOrderStatus());
         dto.setPaymentStatus(o.getPaymentStatus());
         dto.setCreatedAt(o.getCreatedAt());
+        dto.setEmailed(o.isEmailed());
         var items = o.getItems();
         var dtos = items.stream().map(it -> {
             OrderItemDto idto = new OrderItemDto();

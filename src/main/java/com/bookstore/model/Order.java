@@ -41,6 +41,9 @@ public class Order {
     @Version
     private Long version;
 
+    @Column(name = "emailed", nullable = false)
+    private boolean emailed = false;
+
     // Constructors, getters, setters
 
     public Order() {
@@ -105,6 +108,14 @@ public class Order {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public boolean isEmailed() {
+        return emailed;
+    }
+
+    public void setEmailed(boolean emailed) {
+        this.emailed = emailed;
     }
 
     @PrePersist

@@ -13,7 +13,8 @@ public class OrderDto {
     private BigDecimal totalAmount;
     private OrderStatus orderStatus;
     private PaymentStatus paymentStatus;
-    private Instant createdAt;
+        private Instant createdAt;
+        private Boolean emailed;
     private List<OrderItemDto> items = new ArrayList<>();
 
     public Long getId() { return id; }
@@ -30,6 +31,9 @@ public class OrderDto {
 
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
+
+    public Boolean getEmailed() { return emailed; }
+    public void setEmailed(Boolean emailed) { this.emailed = emailed; }
 
     public List<OrderItemDto> getItems() { return items; }
     public void setItems(List<OrderItemDto> items) { this.items = items; }

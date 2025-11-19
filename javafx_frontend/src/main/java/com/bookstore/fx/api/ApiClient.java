@@ -113,6 +113,14 @@ public class ApiClient {
         return resp.statusCode() == 200;
     }
 
+    public boolean adminResendOrderEmail(long orderId) throws IOException, InterruptedException {
+        HttpRequest req = requestBuilder("/admin/orders/" + orderId + "/resend-email")
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString());
+        return resp.statusCode() == 200;
+    }
+
     public Map<String, Object> me() throws IOException, InterruptedException {
         HttpRequest req = requestBuilder("/auth/me").GET().build();
         HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString());

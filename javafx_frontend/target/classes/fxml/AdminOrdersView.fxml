@@ -15,12 +15,14 @@
                 <TableColumn fx:id="totalCol" text="Total" prefWidth="100"/>
                 <TableColumn fx:id="paymentCol" text="Payment" prefWidth="120"/>
                 <TableColumn fx:id="statusCol" text="Status" prefWidth="120"/>
+                <TableColumn fx:id="emailedCol" text="Emailed" prefWidth="90"/>
             </columns>
         </TableView>
         <HBox spacing="10">
             <children>
                 <Button text="Refresh" onAction="#onRefresh"/>
                 <Button text="Mark Payment PAID" onAction="#onMarkPaid"/>
+                <Button text="Resend Email" onAction="#onResendEmail"/>
                 <Label fx:id="statusLabel"/>
             </children>
         </HBox>

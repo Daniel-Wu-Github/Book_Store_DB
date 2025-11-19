@@ -78,12 +78,23 @@ public class DefaultBooks implements CommandLineRunner {
             + "total_amount DECIMAL(19,2) NOT NULL DEFAULT 0.00,"
             + "order_status VARCHAR(50) NOT NULL DEFAULT 'PENDING',"
             + "payment_status VARCHAR(50) NOT NULL DEFAULT 'PENDING',"
+            + "emailed TINYINT(1) NOT NULL DEFAULT 0,"
             + "created_at DATETIME NOT NULL,"
             + "updated_at DATETIME NULL,"
             + "version BIGINT,"
             + "INDEX idx_orders_user (user_id),"
             + "CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE"
             + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        // Ensure 'emailed' column exists even on MySQL versions without IF NOT EXISTS support
+        try {
+            Integer emailedCol = jdbc.queryForObject(
+                    "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'orders' AND COLUMN_NAME = 'emailed'",
+                    Integer.class);
+            if (emailedCol != null && emailedCol == 0) {
+                jdbc.execute("ALTER TABLE orders ADD COLUMN emailed TINYINT(1) NOT NULL DEFAULT 0");
+            }
+        } catch (Exception ignore) { }
 
         jdbc.execute("CREATE TABLE IF NOT EXISTS order_items ("
             + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
@@ -101,6 +112,18 @@ public class DefaultBooks implements CommandLineRunner {
             + "INDEX idx_order_items_book (book_id),"
             + "CONSTRAINT fk_order_items_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,"
             + "CONSTRAINT fk_order_items_book FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE RESTRICT ON UPDATE CASCADE"
+            + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        // Email attempts audit table
+        jdbc.execute("CREATE TABLE IF NOT EXISTS order_emails ("
+            + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+            + "order_id BIGINT NOT NULL,"
+            + "success TINYINT(1) NOT NULL,"
+            + "provider VARCHAR(50),"
+            + "error_message VARCHAR(1000),"
+            + "sent_at DATETIME NOT NULL,"
+            + "INDEX idx_order_emails_order (order_id),"
+            + "CONSTRAINT fk_order_emails_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE"
             + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
         Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM books", Integer.class);
