@@ -10,6 +10,7 @@ public class OrderItemDto {
     private BigDecimal unitPrice;
     private BigDecimal subtotal;
     private String itemType;
+    private Integer rentalDays;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -31,4 +32,7 @@ public class OrderItemDto {
 
     public String getItemType() { return itemType; }
     public void setItemType(String itemType) { this.itemType = itemType; }
+
+    public Integer getRentalDays() { return rentalDays; }
+    public void setRentalDays(Integer rentalDays) { this.rentalDays = rentalDays; }
 }

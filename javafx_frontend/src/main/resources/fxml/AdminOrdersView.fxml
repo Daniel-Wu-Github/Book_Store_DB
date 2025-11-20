@@ -13,6 +13,8 @@
                 <TableColumn fx:id="idCol" text="ID" prefWidth="60"/>
                 <TableColumn fx:id="userCol" text="User" prefWidth="120"/>
                 <TableColumn fx:id="totalCol" text="Total" prefWidth="100"/>
+                <TableColumn fx:id="typeCol" text="Type" prefWidth="90"/>
+                <TableColumn fx:id="rentalDaysCol" text="Rental Days" prefWidth="100"/>
                 <TableColumn fx:id="paymentCol" text="Payment" prefWidth="120"/>
                 <TableColumn fx:id="statusCol" text="Status" prefWidth="120"/>
                 <TableColumn fx:id="emailedCol" text="Emailed" prefWidth="90"/>

@@ -17,7 +17,8 @@
             <columns>
                 <TableColumn fx:id="titleCol" text="Title" prefWidth="200"/>
                 <TableColumn fx:id="authorCol" text="Author" prefWidth="160"/>
-                <TableColumn fx:id="priceCol" text="Price" prefWidth="80"/>
+                        <TableColumn fx:id="priceCol" text="Price" prefWidth="80"/>
+                        <TableColumn fx:id="rentPriceCol" text="Rent Price" prefWidth="100"/>
             </columns>
         </TableView>
         <TitledPane text="Cart" expanded="true">

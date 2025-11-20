@@ -1,3 +1,94 @@
+# Running the App & Loading `.env`
+
+This file documents how to run the backend so it picks up changes in your `.env` file, plus useful verification and troubleshooting commands.
+
+1) Ensure `.env` contains the correct values
+
+- Edit `.env` in the project root. Do not commit it.
+- Recommended: add `.env` to `.gitignore` if not already ignored.
+
+2) Source `.env` into your shell (option A) or let `./run.sh` source it (option B)
+
+Option A — make current shell export the variables (useful for running multiple commands that must share the same environment):
+
+```bash
+# mark variables for export
+set -a
+# load the file
+source .env
+# stop exporting new variables
+set +a
+
+# now run the app in this shell:
+./run.sh
+```
+
+Option B — rely on `./run.sh` to source the `.env` for its process (recommended for normal use):
+
+```bash
+./run.sh
+```
+
+3) Restarting the backend process
+
+- If the app is already running you must stop it and start it again so the process sees the updated environment variables.
+
+Find and kill the process (adjust pattern if your jar name differs):
+
+```bash
+# locate PID
+pgrep -f online-bookstore-backend | xargs -r ps -o pid,cmd -p
+# kill if running
+pkill -f 'online-bookstore-backend' || pkill -f 'spring-boot' || true
+
+# start again
+./run.sh
+```
+
+4) Verify the process environment contains the expected `SPRING_MAIL_*` variables
+
+```bash
+pid=$(pgrep -f online-bookstore-backend | head -n1)
+if [ -n "$pid" ]; then
+  tr '\0' '\n' < /proc/$pid/environ | grep -i SPRING_MAIL || true
+else
+  echo "backend not running"
+fi
+```
+
+5) Tail logs while testing
+
+- Run `./run.sh` in a terminal and watch output. If you need to run it detached, redirect output to a log file and `tail -f` it.
+
+Example (background):
+
+```bash
+nohup ./run.sh > backend.log 2>&1 &
+tail -f backend.log
+```
+
+6) Triggering a manual resend and verifying results
+
+- Preferred: use the Admin UI -> Orders -> Resend Email button.
+- Alternatively, call the admin resend endpoint with curl (check `AdminOrderController` for exact path in codebase):
+
+```bash
+# example (replace with actual path/method if different)
+# curl -X POST -u admin:password http://localhost:8080/api/admin/orders/4/resend
+```
+
+- After triggering, check the backend logs for SMTP success/failure, and inspect the `order_emails` table for a new row (success=1 on success).
+
+7) Troubleshooting common SMTP issue: `535 BadCredentials`
+
+- This indicates the SMTP server rejected the username/password.
+- If using Gmail and 2FA is enabled, create an App Password and use it as `SPRING_MAIL_PASSWORD`.
+- Rotate the password immediately if it may have been exposed.
+
+8) Security reminder
+
+- Never commit `.env` to the repo.
+- If an App Password or secret was exposed, revoke it in the provider console and create a new one.
 # Run the Book Store App (backend + JavaFX frontend)
 
 This file documents up-to-date commands and environment variables to run the backend and the JavaFX frontend. It also describes the `run.sh` helper that starts both services and performs a MySQL preflight check (TCP + auth) so failures are detected early.

@@ -38,8 +38,13 @@ public class SmtpEmailService implements EmailService {
         msg.setTo(recipient);
         msg.setSubject("Order Confirmation #" + order.getId());
         msg.setText(buildBody(order, recipient));
-        mailSender.send(msg);
-        log.info("SMTP email sent for orderId={} to {}", order.getId(), recipient);
+        try {
+            mailSender.send(msg);
+            log.info("SMTP email sent for orderId={} to {}", order.getId(), recipient);
+        } catch (org.springframework.mail.MailException me) {
+            log.error("SMTP send failed for orderId={} to {}: {}", order.getId(), recipient, me.getMessage(), me);
+            throw me;
+        }
     }
 
     private String buildBody(Order order, String recipient) {

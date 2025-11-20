@@ -130,6 +130,11 @@ public class OrderItem {
     private void recalcSubtotal() {
         if (this.unitPrice == null) this.unitPrice = BigDecimal.ZERO;
         if (this.quantity == null) this.quantity = 1;
-        this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
+        // For RENT items, subtotal = unitPrice * quantity * rentalDays (if rentalDays present)
+        if (this.itemType == ItemType.RENT && this.rentalDays != null && this.rentalDays > 0) {
+            this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity)).multiply(BigDecimal.valueOf(this.rentalDays));
+        } else {
+            this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
+        }
     }
 }

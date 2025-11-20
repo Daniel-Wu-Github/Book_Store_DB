@@ -61,7 +61,17 @@ public class OrderService {
             OrderItem item = new OrderItem();
             item.setBook(book);
             item.setQuantity(qty);
-            item.setUnitPrice(book.getPrice());
+            // If this is a RENT item, unit price should be the rent price (e.g. 20% of buy price)
+            try {
+                if (itReq.getItemType() != null && itReq.getItemType().equalsIgnoreCase("RENT")) {
+                    java.math.BigDecimal rentUnit = book.getPrice().multiply(new java.math.BigDecimal("0.20")).setScale(2, java.math.RoundingMode.HALF_UP);
+                    item.setUnitPrice(rentUnit);
+                } else {
+                    item.setUnitPrice(book.getPrice());
+                }
+            } catch (Exception ex) {
+                item.setUnitPrice(book.getPrice());
+            }
             try {
                 item.setItemType(ItemType.valueOf(itReq.getItemType() == null ? "BUY" : itReq.getItemType()));
             } catch (Exception e) {
@@ -98,6 +108,7 @@ public class OrderService {
     public OrderDto toDto(Order o) {
         OrderDto dto = new OrderDto();
         dto.setId(o.getId());
+        dto.setUsername(o.getUser() != null ? o.getUser().getUsername() : null);
         dto.setTotalAmount(o.getTotalAmount());
         dto.setOrderStatus(o.getOrderStatus());
         dto.setPaymentStatus(o.getPaymentStatus());
@@ -112,6 +123,7 @@ public class OrderService {
             idto.setQuantity(it.getQuantity());
             idto.setUnitPrice(it.getUnitPrice());
             idto.setSubtotal(it.getSubtotal());
+            idto.setRentalDays(it.getRentalDays());
             idto.setItemType(it.getItemType().name());
             return idto;
         }).collect(Collectors.toList());

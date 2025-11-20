@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ public class AdminController {
     @FXML private TableView<Map<String,Object>> ordersTable;
     @FXML private TableColumn<Map<String,Object>, Number> idCol;
     @FXML private TableColumn<Map<String,Object>, String> userCol;
+    @FXML private TableColumn<Map<String,Object>, String> typeCol;
+    @FXML private TableColumn<Map<String,Object>, Number> rentalDaysCol;
     @FXML private TableColumn<Map<String,Object>, String> totalCol;
     @FXML private TableColumn<Map<String,Object>, String> paymentCol;
     @FXML private TableColumn<Map<String,Object>, String> statusCol;
@@ -32,6 +35,7 @@ public class AdminController {
     @FXML private TableColumn<Map<String,Object>, String> bTitleCol;
     @FXML private TableColumn<Map<String,Object>, String> bAuthorCol;
     @FXML private TableColumn<Map<String,Object>, Number> bPriceCol;
+    @FXML private TableColumn<Map<String,Object>, Number> bRentPriceCol;
     @FXML private TableColumn<Map<String,Object>, Number> bStockCol;
     @FXML private Label booksStatus;
 
@@ -47,6 +51,40 @@ public class AdminController {
             idCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(num(cd.getValue().get("id"))));
             userCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("username"))));
             totalCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("totalAmount"))));
+            // Type column: show single type if all items same, otherwise 'MIXED'
+            typeCol.setCellValueFactory(cd -> {
+                Object itemsObj = cd.getValue().get("items");
+                String val = "";
+                if (itemsObj instanceof java.util.List) {
+                    @SuppressWarnings("unchecked") java.util.List<java.util.Map<String,Object>> items = (java.util.List<java.util.Map<String,Object>>) itemsObj;
+                    if (!items.isEmpty()) {
+                        String first = (String) items.get(0).getOrDefault("itemType", "");
+                        boolean allSame = items.stream().allMatch(it -> first.equals(it.getOrDefault("itemType", "")));
+                        val = allSame ? first : "MIXED";
+                    }
+                }
+                return new javafx.beans.property.ReadOnlyObjectWrapper<>(val);
+            });
+            // Rental days: show rental days if the order is RENT (or first item is RENT), otherwise blank
+            rentalDaysCol.setCellValueFactory(cd -> {
+                Object itemsObj = cd.getValue().get("items");
+                Integer days = null;
+                if (itemsObj instanceof java.util.List) {
+                    @SuppressWarnings("unchecked") java.util.List<java.util.Map<String,Object>> items = (java.util.List<java.util.Map<String,Object>>) itemsObj;
+                    if (!items.isEmpty()) {
+                        // if all items are RENT and have same rentalDays, show that value, otherwise blank
+                        boolean allRent = items.stream().allMatch(it -> "RENT".equals(it.getOrDefault("itemType", "")));
+                        if (allRent) {
+                            Object rd = items.get(0).get("rentalDays");
+                            if (rd instanceof Number) days = ((Number) rd).intValue();
+                            else if (rd instanceof String) {
+                                try { days = Integer.parseInt((String) rd); } catch (Exception ignored){}
+                            }
+                        }
+                    }
+                }
+                return new javafx.beans.property.ReadOnlyObjectWrapper<>(days);
+            });
             paymentCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("paymentStatus"))));
             statusCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("orderStatus"))));
             emailedCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>((Boolean)cd.getValue().getOrDefault("emailed", Boolean.FALSE)));
@@ -70,6 +108,7 @@ public class AdminController {
             bTitleCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("title"))));
             bAuthorCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(str(cd.getValue().get("author"))));
             bPriceCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(num(cd.getValue().get("price"))));
+            bRentPriceCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(num(cd.getValue().get("rentPrice"))));
             bStockCol.setCellValueFactory(cd -> new javafx.beans.property.ReadOnlyObjectWrapper<>(num(cd.getValue().get("stock"))));
             adminBooksTable.setItems(adminBooksData);
         }
@@ -156,6 +195,64 @@ public class AdminController {
                 adminBooksData.add(created);
                 booksStatus.setText("Book created: " + created.get("title"));
             } catch (Exception e) { booksStatus.setText("Create error: " + e.getMessage()); }
+        });
+    }
+
+    public void onEditBook() {
+        Map<String,Object> sel = adminBooksTable.getSelectionModel().getSelectedItem();
+        if (sel == null) { booksStatus.setText("Select a book"); return; }
+        Number idn = num(sel.get("id")); if (idn == null) { booksStatus.setText("Invalid id"); return; }
+        long id = idn.longValue();
+
+        // build a dialog with fields prefilled
+        Dialog<Map<String,String>> dlg = new Dialog<>();
+        dlg.setTitle("Edit Book");
+        ButtonType ok = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dlg.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane(); grid.setHgap(8); grid.setVgap(8);
+        TextField titleTf = new TextField(str(sel.get("title")));
+        TextField authorTf = new TextField(str(sel.get("author")));
+        TextField priceTf = new TextField(str(sel.get("price")));
+        TextField stockTf = new TextField(str(sel.get("stock")));
+        TextField descTf = new TextField(str(sel.get("description")));
+
+        grid.add(new Label("Title"), 0, 0); grid.add(titleTf, 1, 0);
+        grid.add(new Label("Author"), 0, 1); grid.add(authorTf, 1, 1);
+        grid.add(new Label("Price"), 0, 2); grid.add(priceTf, 1, 2);
+        grid.add(new Label("Stock"), 0, 3); grid.add(stockTf, 1, 3);
+        grid.add(new Label("Description"), 0, 4); grid.add(descTf, 1, 4);
+
+        dlg.getDialogPane().setContent(grid);
+        dlg.setResultConverter(btn -> {
+            if (btn == ok) {
+                Map<String,String> out = Map.of(
+                        "title", titleTf.getText(),
+                        "author", authorTf.getText(),
+                        "price", priceTf.getText(),
+                        "stock", stockTf.getText(),
+                        "description", descTf.getText()
+                );
+                return out;
+            }
+            return null;
+        });
+
+        dlg.showAndWait().ifPresent(values -> {
+            try {
+                Map<String,Object> req = Map.of(
+                        "title", values.get("title"),
+                        "author", values.get("author"),
+                        "price", Double.parseDouble(values.get("price")),
+                        "stock", Integer.parseInt(values.get("stock")),
+                        "description", values.get("description")
+                );
+                Map<String,Object> updated = api.updateBook(id, req);
+                // replace in list
+                int idx = adminBooksData.indexOf(sel);
+                if (idx >= 0) adminBooksData.set(idx, updated);
+                booksStatus.setText("Book updated: " + updated.get("title"));
+            } catch (Exception e) { booksStatus.setText("Update error: " + e.getMessage()); }
         });
     }
 

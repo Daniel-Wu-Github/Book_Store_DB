@@ -17,6 +17,7 @@ public class BooksController {
     @FXML private TableColumn<Map<String,Object>, String> titleCol;
     @FXML private TableColumn<Map<String,Object>, String> authorCol;
     @FXML private TableColumn<Map<String,Object>, BigDecimal> priceCol;
+    @FXML private TableColumn<Map<String,Object>, BigDecimal> rentPriceCol;
     @FXML private Spinner<Integer> qtySpinner;
     @FXML private ComboBox<String> typeCombo;
     @FXML private TextField rentalDaysField;
@@ -36,6 +37,7 @@ public class BooksController {
         titleCol.setCellValueFactory(cd -> fxString(cd.getValue().get("title")));
         authorCol.setCellValueFactory(cd -> fxString(cd.getValue().get("author")));
         priceCol.setCellValueFactory(cd -> fxBigDecimal(cd.getValue().get("price")));
+        rentPriceCol.setCellValueFactory(cd -> fxBigDecimal(cd.getValue().get("rentPrice")));
         booksTable.setItems(booksData);
 
         cartTitleCol.setCellValueFactory(cd -> fxString(cd.getValue().get("title")));

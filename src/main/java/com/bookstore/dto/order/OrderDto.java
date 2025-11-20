@@ -11,11 +11,15 @@ import java.util.List;
 public class OrderDto {
     private Long id;
     private BigDecimal totalAmount;
+    private String username;
     private OrderStatus orderStatus;
     private PaymentStatus paymentStatus;
         private Instant createdAt;
         private Boolean emailed;
     private List<OrderItemDto> items = new ArrayList<>();
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

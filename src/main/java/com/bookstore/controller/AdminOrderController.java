@@ -23,12 +23,14 @@ public class AdminOrderController {
     private final OrderRepository orderRepository;
     private final OrderService orderService;
     private final com.bookstore.service.EmailService emailService;
+    private final com.bookstore.repository.OrderEmailAttemptRepository attemptRepository;
 
     @Autowired
-    public AdminOrderController(OrderRepository orderRepository, OrderService orderService, com.bookstore.service.EmailService emailService) {
+    public AdminOrderController(OrderRepository orderRepository, OrderService orderService, com.bookstore.service.EmailService emailService, com.bookstore.repository.OrderEmailAttemptRepository attemptRepository) {
         this.orderRepository = orderRepository;
         this.orderService = orderService;
         this.emailService = emailService;
+        this.attemptRepository = attemptRepository;
     }
 
     @GetMapping
@@ -67,13 +69,34 @@ public class AdminOrderController {
     @PostMapping("/{id}/resend-email")
     public ResponseEntity<?> resendEmail(@PathVariable Long id) {
         return orderRepository.findById(id).map(o -> {
+            boolean success = false;
+            String error = null;
             try {
                 emailService.sendOrderConfirmation(o);
                 o.setEmailed(true);
                 Order saved = orderRepository.save(o);
+                success = true;
+                try {
+                    com.bookstore.model.OrderEmailAttempt a = new com.bookstore.model.OrderEmailAttempt();
+                    a.setOrderId(id);
+                    a.setSuccess(true);
+                    a.setProvider("manual-resend");
+                    a.setSentAt(java.time.Instant.now());
+                    attemptRepository.save(a);
+                } catch (Exception ignore) { }
                 return ResponseEntity.ok(orderService.toDto(saved));
             } catch (Exception e) {
-                return ResponseEntity.status(500).body("Failed to resend email: " + e.getMessage());
+                error = e.getMessage();
+                try {
+                    com.bookstore.model.OrderEmailAttempt a = new com.bookstore.model.OrderEmailAttempt();
+                    a.setOrderId(id);
+                    a.setSuccess(false);
+                    a.setProvider("manual-resend");
+                    a.setErrorMessage(error);
+                    a.setSentAt(java.time.Instant.now());
+                    attemptRepository.save(a);
+                } catch (Exception ignore) { }
+                return ResponseEntity.status(500).body("Failed to resend email: " + error);
             }
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }

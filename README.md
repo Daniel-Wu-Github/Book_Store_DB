@@ -1,3 +1,42 @@
+# Online Bookstore (Backend + JavaFX Frontend)
+
+This repository contains a Spring Boot backend and a JavaFX frontend for a small online bookstore project used for CSCE 310 coursework.
+
+Key features implemented:
+- Book catalog with both buy and computed rent prices (`rentPrice` = 20% of buy price) shown in public and admin UIs.
+- Admin book management: add / edit books via Admin UI (uses `PUT /api/books/{id}`).
+- Orders support BUY and RENT items; RENT subtotals are calculated as rent unit price * quantity * rentalDays.
+- Email sending and auditing: order confirmation emails are sent after commit and all attempts (automatic and manual resends) are recorded in the `order_emails` table.
+
+Security note: Do not commit `.env` or any credentials. If any secrets are committed, rotate them immediately.
+
+Build (backend):
+
+1. Ensure Java and Maven are installed.
+2. From the project root:
+
+```bash
+mvn -DskipTests package
+```
+
+The built jar will be in `target/` (e.g. `target/online-bookstore-backend-0.0.1-SNAPSHOT.jar`).
+
+Running the application:
+
+- This project provides `./run.sh` which sources the `.env` file and starts the backend. See `runapp.md` for detailed run & env instructions.
+
+Environment variables (`.env`):
+- The app reads configuration (database, SMTP, etc.) from a local `.env` file. `run.sh` sources it when launching.
+- For Gmail SMTP use an App Password (if the account has 2FA enabled). If you see `535 BadCredentials` in the logs or audit rows in `order_emails`, create a new Google App Password and update `SPRING_MAIL_PASSWORD` in `.env`.
+
+Database:
+- Default is MySQL (see `.env` variables `BOOK_DB_*`). The app's seeding is controlled by `APP_SEED_ENABLED`.
+
+Where to look next:
+- Run instructions and troubleshooting: `runapp.md` (new file).
+- Email send/audit code: backend `OrderPlacedListener`, `SmtpEmailService`, and `OrderEmailAttempt` entity/repository.
+
+If you want, I can restart the app here and tail logs to verify the new `.env` is applied.
 # Book Store DB — Project Plan & Maven scaffold (Java stack)
 
 This repository contains planning files and a starter Maven scaffold for the Book Store DB project.

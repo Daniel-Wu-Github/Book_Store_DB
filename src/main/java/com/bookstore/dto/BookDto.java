@@ -1,9 +1,10 @@
 package com.bookstore.dto;
 
 import com.bookstore.model.Book;
-
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Instant;
+
 
 public class BookDto {
 
@@ -12,6 +13,7 @@ public class BookDto {
     private String author;
     private String isbn;
     private BigDecimal price;
+    private BigDecimal rentPrice;
     private Integer stock;
     private String description;
     private Instant createdAt;
@@ -34,6 +36,9 @@ public class BookDto {
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) { this.price = price; }
 
+    public BigDecimal getRentPrice() { return rentPrice; }
+    public void setRentPrice(BigDecimal rentPrice) { this.rentPrice = rentPrice; }
+
     public Integer getStock() { return stock; }
     public void setStock(Integer stock) { this.stock = stock; }
 
@@ -54,6 +59,12 @@ public class BookDto {
         d.setAuthor(b.getAuthor());
         d.setIsbn(b.getIsbn());
         d.setPrice(b.getPrice());
+        // Compute a default rent price (20% of buy price) if price is present
+        try {
+            if (b.getPrice() != null) {
+                d.setRentPrice(b.getPrice().multiply(new BigDecimal("0.20")).setScale(2, RoundingMode.HALF_UP));
+            }
+        } catch (Exception ignore) { }
         d.setStock(b.getStock());
         d.setDescription(b.getDescription());
         d.setCreatedAt(b.getCreatedAt());

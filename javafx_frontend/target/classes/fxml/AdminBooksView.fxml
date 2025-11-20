@@ -9,6 +9,7 @@
             <children>
                 <Button text="Refresh" onAction="#onRefreshBooks"/>
                 <Button text="New Book" onAction="#onNewBook"/>
+                <Button text="Edit Book" onAction="#onEditBook"/>
                 <Button text="Delete Book" onAction="#onDeleteBook"/>
                 <Label fx:id="booksStatus"/>
             </children>
@@ -19,6 +20,7 @@
                 <TableColumn fx:id="bTitleCol" text="Title" prefWidth="200"/>
                 <TableColumn fx:id="bAuthorCol" text="Author" prefWidth="160"/>
                 <TableColumn fx:id="bPriceCol" text="Price" prefWidth="80"/>
+                <TableColumn fx:id="bRentPriceCol" text="Rent Price" prefWidth="100"/>
                 <TableColumn fx:id="bStockCol" text="Stock" prefWidth="80"/>
             </columns>
         </TableView>
