@@ -1,0 +1,6 @@
+FROM eclipse-temurin:11-jre-slim
+WORKDIR /app
+# The jar is expected at target/*.jar after running `mvn package`
+COPY target/*.jar app.jar
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app/app.jar"]
