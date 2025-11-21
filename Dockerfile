@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-slim
+FROM eclipse-temurin:11-jre
 WORKDIR /app
 # Default Dockerfile (backend). This exists so platforms that expect a
 # top-level `Dockerfile` (Render default) can build the backend image.
