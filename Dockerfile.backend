@@ -1,12 +1,10 @@
 FROM maven:3.8.8-eclipse-temurin-11 AS builder
 WORKDIR /workspace
 
-# Prepare Maven cache and copy project files for better layer caching
-COPY pom.xml mvnw* ./
-COPY .mvn .mvn
-RUN mkdir -p src
-COPY src ./src
-RUN mvn -B -DskipTests package -DskipTests
+# Copy full repository and build inside the builder stage. This avoids failing
+# on COPY of optional files (like .mvn) that may not exist in the repo.
+COPY . ./
+RUN mvn -B -DskipTests package
 
 FROM eclipse-temurin:11-jre
 WORKDIR /app

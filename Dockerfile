@@ -1,14 +1,11 @@
 FROM maven:3.8.8-eclipse-temurin-11 AS builder
 WORKDIR /workspace
 
-# Copy only the files required for a Maven build first to leverage Docker cache
-COPY pom.xml mvnw* ./
-COPY .mvn .mvn
-RUN mkdir -p src
-
-# Copy source and build
-COPY src ./src
-RUN mvn -B -DskipTests package -DskipTests
+# Copy the full project into the builder and build. We purposely avoid
+# copying non-existent paths like `.mvn` or `mvnw*` to prevent build errors
+# on platforms where those files aren't present.
+COPY . ./
+RUN mvn -B -DskipTests package
 
 FROM eclipse-temurin:11-jre
 WORKDIR /app
