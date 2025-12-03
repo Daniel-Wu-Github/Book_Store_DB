@@ -59,3 +59,24 @@ Thumbs.db
 
 #everything in the lib directory
 /lib/
+
+# Frontend (Vite/React)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+
+# Java build outputs in any module
+**/target/
+
+# Runtime logs and temp
+/run-logs/
+*.log
+
+# Docker / deployment artifacts (ignore build artifacts; note: tracked files remain tracked)
+Dockerfile*
+render.yaml
+online_deploy.md
+
+# Optional: ignore generated static folder if present
+static/
