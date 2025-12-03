@@ -3,6 +3,7 @@ package com.bookstore.fx.controller;
 import com.bookstore.fx.core.SceneRouter;
 import com.bookstore.fx.api.ApiClient;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -17,25 +18,26 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        // Fetch user info asynchronously (JavaFX thread safety) and update role label / admin access.
-        new Thread(() -> {
-            try {
-                var me = api.me();
-                Platform.runLater(() -> {
-                    if (me.isEmpty()) {
-                        statusLabel.setText("Not authenticated");
-                    } else {
-                        String roles = String.valueOf(me.getOrDefault("roles", ""));
-                        statusLabel.setText("Logged in as " + me.get("username") + " (" + roles + ")");
-                        if (roles.contains("ROLE_ADMIN")) {
-                            adminTab.setDisable(false);
-                        }
-                    }
-                });
-            } catch (Exception e) {
-                Platform.runLater(() -> statusLabel.setText("User info error: " + e.getMessage()));
+        Task<java.util.Map<String,Object>> task = new Task<>() {
+            @Override
+            protected java.util.Map<String,Object> call() throws Exception {
+                return api.me();
             }
-        }).start();
+        };
+        task.setOnSucceeded(ev -> {
+            var me = task.getValue();
+            if (me == null || me.isEmpty()) {
+                statusLabel.setText("Not authenticated");
+            } else {
+                String roles = String.valueOf(me.getOrDefault("roles", ""));
+                statusLabel.setText("Logged in as " + me.get("username") + " (" + roles + ")");
+                if (roles.contains("ROLE_ADMIN")) {
+                    adminTab.setDisable(false);
+                }
+            }
+        });
+        task.setOnFailed(ev -> statusLabel.setText("User info error: " + task.getException().getMessage()));
+        new Thread(task, "fetch-me-task").start();
     }
 
     @FXML
