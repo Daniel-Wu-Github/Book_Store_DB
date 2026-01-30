@@ -1,0 +1,1435 @@
+nohup: ignoring input
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m---------------< [0;36mcom.bookstore:online-bookstore-backend[0;1m >---------------[m
+[[1;34mINFO[m] [1mBuilding online-bookstore-backend 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspring-boot-maven-plugin:2.7.12:run[m [1m(default-cli)[0;1m > [0;1mtest-compile[m @ [36monline-bookstore-backend[0;1m >>>[m
+[[1;33mWARNING[m] The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:resources[m [1m(default-resources)[m @ [36monline-bookstore-backend[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 2 resources
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.11.0:compile[m [1m(default-compile)[m @ [36monline-bookstore-backend[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:testResources[m [1m(default-testResources)[m @ [36monline-bookstore-backend[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 2 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.11.0:testCompile[m [1m(default-testCompile)[m @ [36monline-bookstore-backend[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspring-boot-maven-plugin:2.7.12:run[m [1m(default-cli)[0;1m < [0;1mtest-compile[m @ [36monline-bookstore-backend[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:2.7.12:run[m [1m(default-cli)[m @ [36monline-bookstore-backend[0;1m ---[m
+[[1;34mINFO[m] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.12)
+
+2026-01-30 00:07:45.467  INFO 146633 --- [           main] c.b.OnlineBookstoreBackendApplication    : Starting OnlineBookstoreBackendApplication using Java 11.0.29 on MSI with PID 146633 (/mnt/c/Users/danie/OneDrive/Documents/CSCE 310/Book_Store_DB/target/classes started by root in /mnt/c/Users/danie/OneDrive/Documents/CSCE 310/Book_Store_DB)
+2026-01-30 00:07:45.478 DEBUG 146633 --- [           main] c.b.OnlineBookstoreBackendApplication    : Running with Spring Boot v2.7.12, Spring v5.3.27
+2026-01-30 00:07:45.480  INFO 146633 --- [           main] c.b.OnlineBookstoreBackendApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-01-30 00:08:01.926  INFO 146633 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-30 00:08:08.119  INFO 146633 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5950 ms. Found 5 JPA repository interfaces.
+2026-01-30 00:08:19.349  INFO 146633 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2026-01-30 00:08:19.489  INFO 146633 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-30 00:08:19.495  INFO 146633 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2026-01-30 00:08:20.999  INFO 146633 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-01-30 00:08:21.002  INFO 146633 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 35356 ms
+2026-01-30 00:08:27.121  INFO 146633 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-30 00:08:29.403  INFO 146633 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-01-30 00:08:35.178  INFO 146633 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-01-30 00:08:38.696  INFO 146633 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-30 00:08:42.074  INFO 146633 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-30 00:08:42.447  INFO 146633 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-01-30 00:09:00.181  INFO 146633 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-01-30 00:09:00.261  INFO 146633 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-30 00:09:03.033 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminOrderController
+2026-01-30 00:09:03.109 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminOrderController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.updateStatus(java.lang.Long,com.bookstore.model.OrderStatus)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:03.407 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminOrderController
+2026-01-30 00:09:03.410 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminOrderController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.resendEmail(java.lang.Long)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:03.414 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminOrderController
+2026-01-30 00:09:03.417 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminOrderController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.listAll()]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:03.421 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminOrderController
+2026-01-30 00:09:03.424 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminOrderController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.updatePayment(java.lang.Long,com.bookstore.model.PaymentStatus)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:04.059 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminUserController
+2026-01-30 00:09:04.063 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminUserController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.get(java.lang.Long)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:04.068 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminUserController
+2026-01-30 00:09:04.072 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminUserController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.update(java.lang.Long,com.bookstore.dto.UpdateUserRequest)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:04.080 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminUserController
+2026-01-30 00:09:04.085 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminUserController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.delete(java.lang.Long)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:04.089 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminUserController
+2026-01-30 00:09:04.093 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminUserController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.create(com.bookstore.dto.CreateUserRequest)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:04.099 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on: com.bookstore.controller.AdminUserController
+2026-01-30 00:09:04.106 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.AdminUserController; public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll()]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:06.332 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on specific method: public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.update(java.lang.Long,com.bookstore.dto.UpdateBookRequest)
+2026-01-30 00:09:06.339 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.BookController; public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.update(java.lang.Long,com.bookstore.dto.UpdateBookRequest)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:06.344 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on specific method: public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.delete(java.lang.Long)
+2026-01-30 00:09:06.348 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.BookController; public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.delete(java.lang.Long)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:06.352 DEBUG 146633 --- [           main] .PrePostAnnotationSecurityMetadataSource : @org.springframework.security.access.prepost.PreAuthorize(value="hasRole('MANAGER') or hasRole('ADMIN')") found on specific method: public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.create(com.bookstore.dto.CreateBookRequest)
+2026-01-30 00:09:06.355 DEBUG 146633 --- [           main] m.DelegatingMethodSecurityMetadataSource : Caching method [CacheKey[com.bookstore.controller.BookController; public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.create(com.bookstore.dto.CreateBookRequest)]] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+2026-01-30 00:09:07.390 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/books', GET]
+2026-01-30 00:09:07.397 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/books/**', GET]
+2026-01-30 00:09:07.398 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/auth/**']
+2026-01-30 00:09:07.398 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/']
+2026-01-30 00:09:07.399 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/index.html']
+2026-01-30 00:09:07.399 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/static/**']
+2026-01-30 00:09:07.399 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/favicon.ico']
+2026-01-30 00:09:07.400 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/**/*.css']
+2026-01-30 00:09:07.400 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/**/*.js']
+2026-01-30 00:09:07.400 DEBUG 146633 --- [           main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2026-01-30 00:09:07.418  INFO 146633 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@64908ab9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b06dc57, org.springframework.security.web.context.SecurityContextPersistenceFilter@4d66cb, org.springframework.security.web.header.HeaderWriterFilter@5008559a, org.springframework.security.web.authentication.logout.LogoutFilter@6f36e806, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7535307c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@63551c66, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2761156e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5af641d3, org.springframework.security.web.session.SessionManagementFilter@2eea4441, org.springframework.security.web.access.ExceptionTranslationFilter@f5f8de2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@68f75a35]
+2026-01-30 00:09:07.837  WARN 146633 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-30 00:09:13.058  INFO 146633 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-01-30 00:09:17.134  INFO 146633 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-01-30 00:09:17.796  INFO 146633 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2026-01-30 00:09:17.845  INFO 146633 --- [           main] c.b.OnlineBookstoreBackendApplication    : Started OnlineBookstoreBackendApplication in 98.088 seconds (JVM running for 100.539)
+DefaultBooks: seeding disabled by property app.seed.enabled=false
+DefaultUsers: seeding disabled by property app.seed.enabled=false
+2026-01-30 00:17:45.847  INFO 146633 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-30 00:17:45.849  INFO 146633 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-01-30 00:17:45.861  INFO 146633 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2026-01-30 00:17:45.900 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:17:45.934 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:17:45.943 DEBUG 146633 --- [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:17:45.970 DEBUG 146633 --- [nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:17:45.972 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 00:17:46.257  INFO 146633 --- [nio-8080-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1765068559441,"i_b":"ofbgysmqGKf5zYtjg75Zj4guo0EfDtru6awWcoeiRUk"};] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-01-30 00:17:46.260 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:17:46.260 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:17:46.261 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:17:46.262 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 066256A12ACC6FB6FA39FBCBED3C38D2
+2026-01-30 00:17:46.264 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:17:46.264 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 00:17:46.266 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/books/search?q=
+2026-01-30 00:17:46.267 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:17:46.268 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:17:46.268 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:17:46.269 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 066256A12ACC6FB6FA39FBCBED3C38D2
+2026-01-30 00:17:46.269 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:17:46.270 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:17:46.271 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/books/search?q=] with attributes [permitAll]
+2026-01-30 00:17:46.271 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 066256A12ACC6FB6FA39FBCBED3C38D2
+2026-01-30 00:17:46.272 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/books/search?q=
+2026-01-30 00:17:46.273 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:17:46.273 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 00:17:46.610 DEBUG 146633 --- [nio-8080-exec-2] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:17:46.610 DEBUG 146633 --- [nio-8080-exec-4] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:17:46.611 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:17:46.611 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:17:46.614 DEBUG 146633 --- [nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:17:46.614 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+Hibernate: 
+    select
+        book0_.id as id1_0_,
+        book0_.author as author2_0_,
+        book0_.created_at as created_3_0_,
+        book0_.description as descript4_0_,
+        book0_.isbn as isbn5_0_,
+        book0_.price as price6_0_,
+        book0_.stock as stock7_0_,
+        book0_.title as title8_0_,
+        book0_.updated_at as updated_9_0_,
+        book0_.version as version10_0_ 
+    from
+        books book0_
+2026-01-30 00:17:48.303 DEBUG 146633 --- [nio-8080-exec-3] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:17:48.314 DEBUG 146633 --- [nio-8080-exec-3] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:17:48.316 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:19:16.909 DEBUG 146633 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing DELETE /api/admin/users/11
+2026-01-30 00:19:16.924 DEBUG 146633 --- [nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:19:18.822 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-01-30 00:19:18.838 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.w.a.www.BasicAuthenticationFilter  : Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]
+2026-01-30 00:19:19.004 DEBUG 146633 --- [nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Created HttpSession as SecurityContext is non-default
+2026-01-30 00:19:19.033 DEBUG 146633 --- [nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@37dfbc4e]
+2026-01-30 00:19:19.038 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [DELETE /api/admin/users/11] with attributes [authenticated]
+2026-01-30 00:19:19.044 DEBUG 146633 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured DELETE /api/admin/users/11
+2026-01-30 00:19:19.263 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.delete(java.lang.Long); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        count(*) as col_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=? 
+        and version=?
+2026-01-30 00:19:20.309  WARN 146633 --- [nio-8080-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2026-01-30 00:19:20.310 ERROR 146633 --- [nio-8080-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`bookstore`.`orders`, CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+2026-01-30 00:19:20.325  INFO 146633 --- [nio-8080-exec-5] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2026-01-30 00:19:20.629 DEBUG 146633 --- [nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@37dfbc4e]
+2026-01-30 00:19:20.633 DEBUG 146633 --- [nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@37dfbc4e]
+2026-01-30 00:19:20.634 DEBUG 146633 --- [nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:20:03.629 DEBUG 146633 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing DELETE /api/admin/users/13
+2026-01-30 00:20:03.631 DEBUG 146633 --- [nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:20:03.736 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-01-30 00:20:03.737 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.w.a.www.BasicAuthenticationFilter  : Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]
+2026-01-30 00:20:03.740 DEBUG 146633 --- [nio-8080-exec-7] w.c.HttpSessionSecurityContextRepository : Created HttpSession as SecurityContext is non-default
+2026-01-30 00:20:03.741 DEBUG 146633 --- [nio-8080-exec-7] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@217576d1]
+2026-01-30 00:20:03.742 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [DELETE /api/admin/users/13] with attributes [authenticated]
+2026-01-30 00:20:03.745 DEBUG 146633 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured DELETE /api/admin/users/13
+2026-01-30 00:20:03.747 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.delete(java.lang.Long); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        count(*) as col_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=? 
+        and version=?
+2026-01-30 00:20:03.765  WARN 146633 --- [nio-8080-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2026-01-30 00:20:03.766 ERROR 146633 --- [nio-8080-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`bookstore`.`orders`, CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+2026-01-30 00:20:03.767  INFO 146633 --- [nio-8080-exec-7] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2026-01-30 00:20:03.773 DEBUG 146633 --- [nio-8080-exec-7] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@217576d1]
+2026-01-30 00:20:03.777 DEBUG 146633 --- [nio-8080-exec-7] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@217576d1]
+2026-01-30 00:20:03.778 DEBUG 146633 --- [nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:20:52.214 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2026-01-30 00:20:52.216 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:20:52.358 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-01-30 00:20:52.359 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.w.a.www.BasicAuthenticationFilter  : Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]
+2026-01-30 00:20:52.360 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Created HttpSession as SecurityContext is non-default
+2026-01-30 00:20:52.360 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@c251e32]
+2026-01-30 00:20:52.362 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/users] with attributes [authenticated]
+2026-01-30 00:20:52.364 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2026-01-30 00:20:52.367 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll(); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_
+2026-01-30 00:20:52.387 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@c251e32]
+2026-01-30 00:20:52.388 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=127.0.0.1, SessionId=null], Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@c251e32]
+2026-01-30 00:20:52.389 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:20:58.731 DEBUG 146633 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:20:58.732 DEBUG 146633 --- [io-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:20:58.734 DEBUG 146633 --- [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:20:58.735 DEBUG 146633 --- [io-8080-exec-10] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:20:58.736 DEBUG 146633 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 00:20:58.737 DEBUG 146633 --- [io-8080-exec-10] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:20:58.738 DEBUG 146633 --- [io-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:35.589 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:43:35.610 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:43:35.629 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:43:35.643 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 066256A12ACC6FB6FA39FBCBED3C38D2
+2026-01-30 00:43:35.651 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:43:35.652 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 00:43:35.678 DEBUG 146633 --- [nio-8080-exec-2] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 00:43:35.690 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:40.106 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-01-30 00:43:40.107 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 00:43:40.108 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 00:43:40.109 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 066256A12ACC6FB6FA39FBCBED3C38D2
+2026-01-30 00:43:40.110 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [POST /api/auth/login] with attributes [permitAll]
+2026-01-30 00:43:40.111 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:43:41.030 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:43:41.061 DEBUG 146633 --- [nio-8080-exec-4] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@36002ba5]
+2026-01-30 00:43:41.064 DEBUG 146633 --- [nio-8080-exec-4] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@36002ba5]
+2026-01-30 00:43:41.067 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:41.085 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 00:43:41.086 DEBUG 146633 --- [nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:41.089 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:41.092 DEBUG 146633 --- [nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 00:43:41.093 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_ 
+    where
+        user0_.username=?
+2026-01-30 00:43:41.114 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:41.204 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/books/search?q=
+2026-01-30 00:43:41.207 DEBUG 146633 --- [nio-8080-exec-3] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:41.210 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:41.215 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/books/search?q=] with attributes [permitAll]
+2026-01-30 00:43:41.216 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/books/search?q=
+Hibernate: 
+    select
+        book0_.id as id1_0_,
+        book0_.author as author2_0_,
+        book0_.created_at as created_3_0_,
+        book0_.description as descript4_0_,
+        book0_.isbn as isbn5_0_,
+        book0_.price as price6_0_,
+        book0_.stock as stock7_0_,
+        book0_.title as title8_0_,
+        book0_.updated_at as updated_9_0_,
+        book0_.version as version10_0_ 
+    from
+        books book0_
+2026-01-30 00:43:41.249 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:42.621 DEBUG 146633 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2026-01-30 00:43:42.624 DEBUG 146633 --- [nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:42.627 DEBUG 146633 --- [nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:42.631 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/users] with attributes [authenticated]
+2026-01-30 00:43:42.634 DEBUG 146633 --- [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2026-01-30 00:43:42.648 DEBUG 146633 --- [nio-8080-exec-5] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll(); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_
+2026-01-30 00:43:42.667 DEBUG 146633 --- [nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:43.246 DEBUG 146633 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/orders
+2026-01-30 00:43:43.250 DEBUG 146633 --- [nio-8080-exec-6] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:43.253 DEBUG 146633 --- [nio-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:43.258 DEBUG 146633 --- [nio-8080-exec-6] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/orders] with attributes [authenticated]
+2026-01-30 00:43:43.260 DEBUG 146633 --- [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/orders
+2026-01-30 00:43:43.267 DEBUG 146633 --- [nio-8080-exec-6] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.listAll(); target is of class [com.bookstore.controller.AdminOrderController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        order0_.id as id1_3_,
+        order0_.created_at as created_2_3_,
+        order0_.emailed as emailed3_3_,
+        order0_.order_status as order_st4_3_,
+        order0_.payment_status as payment_5_3_,
+        order0_.total_amount as total_am6_3_,
+        order0_.updated_at as updated_7_3_,
+        order0_.user_id as user_id9_3_,
+        order0_.version as version8_3_ 
+    from
+        orders order0_
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+2026-01-30 00:43:43.780 DEBUG 146633 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2026-01-30 00:43:43.782 DEBUG 146633 --- [nio-8080-exec-7] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:43.785 DEBUG 146633 --- [nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:43.787 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/users] with attributes [authenticated]
+2026-01-30 00:43:43.790 DEBUG 146633 --- [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2026-01-30 00:43:43.796 DEBUG 146633 --- [nio-8080-exec-7] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll(); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_
+2026-01-30 00:43:43.836 DEBUG 146633 --- [nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+2026-01-30 00:43:44.088 DEBUG 146633 --- [nio-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:47.116 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2026-01-30 00:43:47.119 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:47.123 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:47.127 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/users] with attributes [authenticated]
+2026-01-30 00:43:47.129 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2026-01-30 00:43:47.135 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll(); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_
+2026-01-30 00:43:47.171 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:54.211 DEBUG 146633 --- [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing DELETE /api/admin/users/13
+2026-01-30 00:43:54.212 DEBUG 146633 --- [nio-8080-exec-9] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:54.213 DEBUG 146633 --- [nio-8080-exec-9] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:54.214 DEBUG 146633 --- [nio-8080-exec-9] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [DELETE /api/admin/users/13] with attributes [authenticated]
+2026-01-30 00:43:54.215 DEBUG 146633 --- [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured DELETE /api/admin/users/13
+2026-01-30 00:43:54.219 DEBUG 146633 --- [nio-8080-exec-9] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.delete(java.lang.Long); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        count(*) as col_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=? 
+        and version=?
+2026-01-30 00:43:54.255  WARN 146633 --- [nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2026-01-30 00:43:54.256 ERROR 146633 --- [nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`bookstore`.`orders`, CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+2026-01-30 00:43:54.259  INFO 146633 --- [nio-8080-exec-9] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2026-01-30 00:43:54.279 DEBUG 146633 --- [nio-8080-exec-9] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:43:56.602 DEBUG 146633 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/orders
+2026-01-30 00:43:56.603 DEBUG 146633 --- [io-8080-exec-10] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:56.604 DEBUG 146633 --- [io-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:43:56.605 DEBUG 146633 --- [io-8080-exec-10] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/orders] with attributes [authenticated]
+2026-01-30 00:43:56.606 DEBUG 146633 --- [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/orders
+2026-01-30 00:43:56.608 DEBUG 146633 --- [io-8080-exec-10] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.listAll(); target is of class [com.bookstore.controller.AdminOrderController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        order0_.id as id1_3_,
+        order0_.created_at as created_2_3_,
+        order0_.emailed as emailed3_3_,
+        order0_.order_status as order_st4_3_,
+        order0_.payment_status as payment_5_3_,
+        order0_.total_amount as total_am6_3_,
+        order0_.updated_at as updated_7_3_,
+        order0_.user_id as user_id9_3_,
+        order0_.version as version8_3_ 
+    from
+        orders order0_
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+2026-01-30 00:43:56.673 DEBUG 146633 --- [io-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:44:01.134 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/orders
+2026-01-30 00:44:01.135 DEBUG 146633 --- [nio-8080-exec-2] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:01.135 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:01.136 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/orders] with attributes [authenticated]
+2026-01-30 00:44:01.136 DEBUG 146633 --- [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/orders
+2026-01-30 00:44:01.137 DEBUG 146633 --- [nio-8080-exec-2] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminOrderController.listAll(); target is of class [com.bookstore.controller.AdminOrderController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        order0_.id as id1_3_,
+        order0_.created_at as created_2_3_,
+        order0_.emailed as emailed3_3_,
+        order0_.order_status as order_st4_3_,
+        order0_.payment_status as payment_5_3_,
+        order0_.total_amount as total_am6_3_,
+        order0_.updated_at as updated_7_3_,
+        order0_.user_id as user_id9_3_,
+        order0_.version as version8_3_ 
+    from
+        orders order0_
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        user0_.id as id1_4_0_,
+        user0_.created_at as created_2_4_0_,
+        user0_.email as email3_4_0_,
+        user0_.enabled as enabled4_4_0_,
+        user0_.password as password5_4_0_,
+        user0_.roles as roles6_4_0_,
+        user0_.updated_at as updated_7_4_0_,
+        user0_.username as username8_4_0_,
+        user0_.version as version9_4_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+Hibernate: 
+    select
+        items0_.order_id as order_i11_2_0_,
+        items0_.id as id1_2_0_,
+        items0_.id as id1_2_1_,
+        items0_.book_id as book_id10_2_1_,
+        items0_.created_at as created_2_2_1_,
+        items0_.item_type as item_typ3_2_1_,
+        items0_.order_id as order_i11_2_1_,
+        items0_.quantity as quantity4_2_1_,
+        items0_.rental_days as rental_d5_2_1_,
+        items0_.subtotal as subtotal6_2_1_,
+        items0_.unit_price as unit_pri7_2_1_,
+        items0_.updated_at as updated_8_2_1_,
+        items0_.version as version9_2_1_ 
+    from
+        order_items items0_ 
+    where
+        items0_.order_id=?
+2026-01-30 00:44:01.191 DEBUG 146633 --- [nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:44:02.056 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/books/search?q=
+2026-01-30 00:44:02.057 DEBUG 146633 --- [nio-8080-exec-4] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:02.058 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:02.060 DEBUG 146633 --- [nio-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/books/search?q=] with attributes [permitAll]
+2026-01-30 00:44:02.061 DEBUG 146633 --- [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/books/search?q=
+Hibernate: 
+    select
+        book0_.id as id1_0_,
+        book0_.author as author2_0_,
+        book0_.created_at as created_3_0_,
+        book0_.description as descript4_0_,
+        book0_.isbn as isbn5_0_,
+        book0_.price as price6_0_,
+        book0_.stock as stock7_0_,
+        book0_.title as title8_0_,
+        book0_.updated_at as updated_9_0_,
+        book0_.version as version10_0_ 
+    from
+        books book0_
+2026-01-30 00:44:02.072 DEBUG 146633 --- [nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:44:04.100 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing DELETE /api/books/4
+2026-01-30 00:44:04.101 DEBUG 146633 --- [nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:04.102 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:04.103 DEBUG 146633 --- [nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [DELETE /api/books/4] with attributes [authenticated]
+2026-01-30 00:44:04.104 DEBUG 146633 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured DELETE /api/books/4
+2026-01-30 00:44:04.107 DEBUG 146633 --- [nio-8080-exec-1] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.BookController.delete(java.lang.Long); target is of class [com.bookstore.controller.BookController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        count(*) as col_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    select
+        book0_.id as id1_0_0_,
+        book0_.author as author2_0_0_,
+        book0_.created_at as created_3_0_0_,
+        book0_.description as descript4_0_0_,
+        book0_.isbn as isbn5_0_0_,
+        book0_.price as price6_0_0_,
+        book0_.stock as stock7_0_0_,
+        book0_.title as title8_0_0_,
+        book0_.updated_at as updated_9_0_0_,
+        book0_.version as version10_0_0_ 
+    from
+        books book0_ 
+    where
+        book0_.id=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        id=? 
+        and version=?
+2026-01-30 00:44:04.163  WARN 146633 --- [nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1451, SQLState: 23000
+2026-01-30 00:44:04.165 ERROR 146633 --- [nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Cannot delete or update a parent row: a foreign key constraint fails (`bookstore`.`order_items`, CONSTRAINT `fk_order_items_book` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+2026-01-30 00:44:04.168  INFO 146633 --- [nio-8080-exec-1] o.h.e.j.b.internal.AbstractBatchImpl     : HHH000010: On release of batch it still contained JDBC statements
+2026-01-30 00:44:04.188 DEBUG 146633 --- [nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 00:44:05.403 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/admin/users
+2026-01-30 00:44:05.404 DEBUG 146633 --- [nio-8080-exec-3] w.c.HttpSessionSecurityContextRepository : Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:05.405 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_ADMIN, ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_ADMIN, ROLE_USER]]]
+2026-01-30 00:44:05.406 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/admin/users] with attributes [authenticated]
+2026-01-30 00:44:05.407 DEBUG 146633 --- [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/admin/users
+2026-01-30 00:44:05.409 DEBUG 146633 --- [nio-8080-exec-3] o.s.s.a.i.a.MethodSecurityInterceptor    : Authorized ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.bookstore.controller.AdminUserController.listAll(); target is of class [com.bookstore.controller.AdminUserController] with attributes [[authorize: 'hasRole('MANAGER') or hasRole('ADMIN')', filter: 'null', filterTarget: 'null']]
+Hibernate: 
+    select
+        user0_.id as id1_4_,
+        user0_.created_at as created_2_4_,
+        user0_.email as email3_4_,
+        user0_.enabled as enabled4_4_,
+        user0_.password as password5_4_,
+        user0_.roles as roles6_4_,
+        user0_.updated_at as updated_7_4_,
+        user0_.username as username8_4_,
+        user0_.version as version9_4_ 
+    from
+        users user0_
+2026-01-30 00:44:05.420 DEBUG 146633 --- [nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2026-01-30 01:15:14.082 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-01-30 01:15:14.093 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2026-01-30 01:15:14.096 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-01-30 01:15:14.106 DEBUG 146633 --- [nio-8080-exec-8] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/auth/me] with attributes [permitAll]
+2026-01-30 01:15:14.107 DEBUG 146633 --- [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-01-30 01:15:14.141 DEBUG 146633 --- [nio-8080-exec-8] w.c.HttpSessionSecurityContextRepository : Did not store anonymous SecurityContext
+2026-01-30 01:15:14.142 DEBUG 146633 --- [nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request

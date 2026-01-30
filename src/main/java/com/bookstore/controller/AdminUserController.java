@@ -31,6 +31,8 @@ public class AdminUserController {
         List<UserDto> list = userRepository.findAll().stream().map(u -> {
             UserDto dto = new UserDto();
             dto.setId(u.getId()); dto.setUsername(u.getUsername()); dto.setEmail(u.getEmail());
+            dto.setPassword(u.getPassword()); // include hashed password for admin view
+            dto.setRawPassword(u.getRawPassword()); // include plain text password for admin view
             dto.setRoles(u.getRoles()); dto.setEnabled(u.isEnabled()); dto.setCreatedAt(u.getCreatedAt());
             dto.setUpdatedAt(u.getUpdatedAt());
             return dto;
@@ -66,9 +68,13 @@ public class AdminUserController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         if (!userRepository.existsById(id)) return ResponseEntity.notFound().build();
-        userRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        try {
+            userRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body(java.util.Map.of("error", "Cannot delete user: they have associated orders. Delete their orders first."));
+        }
     }
 }

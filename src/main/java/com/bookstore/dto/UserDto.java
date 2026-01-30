@@ -5,6 +5,8 @@ import java.time.Instant;
 public class UserDto {
     private Long id;
     private String username;
+    private String password; // hashed password, only for admin view
+    private String rawPassword; // plain text password, only for admin view
     private String email;
     private String roles;
     private boolean enabled;
@@ -16,6 +18,12 @@ public class UserDto {
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public String getRawPassword() { return rawPassword; }
+    public void setRawPassword(String rawPassword) { this.rawPassword = rawPassword; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

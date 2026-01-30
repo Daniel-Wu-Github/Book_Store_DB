@@ -66,9 +66,13 @@ public class BookController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        boolean deleted = bookService.delete(id);
-        if (!deleted) return ResponseEntity.notFound().build();
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        try {
+            boolean deleted = bookService.delete(id);
+            if (!deleted) return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body(java.util.Map.of("error", "Cannot delete book: it has associated orders."));
+        }
     }
 }
