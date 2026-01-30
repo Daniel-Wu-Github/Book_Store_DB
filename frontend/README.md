@@ -20,10 +20,13 @@ npm run dev
 Open http://localhost:5173 and the app will fetch `/api/books` via the proxy configured in `vite.config.js`.
 
 Build for production:
-
 ```bash
+# build locally only
 npm run build
 npm run preview
+
+# build and copy into backend static resources (Spring Boot)
+npm run build:deploy
 ```
 
 About React (very brief)

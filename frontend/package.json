@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:deploy": "vite build && rm -rf ../src/main/resources/static/* && cp -r dist/* ../src/main/resources/static/"
   },
   "dependencies": {
     "react": "^18.2.0",

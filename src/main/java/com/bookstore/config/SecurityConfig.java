@@ -23,6 +23,8 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests()
+                // Public access to book browsing (read-only)
+                .antMatchers(org.springframework.http.HttpMethod.GET, "/api/books", "/api/books/**").permitAll()
                 .antMatchers("/api/auth/**", "/", "/index.html", "/static/**", "/favicon.ico", "/**/*.css", "/**/*.js").permitAll()
                 .anyRequest().authenticated()
             .and()
