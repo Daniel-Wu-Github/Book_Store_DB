@@ -108,7 +108,8 @@ public class OrderService {
     public OrderDto toDto(Order o) {
         OrderDto dto = new OrderDto();
         dto.setId(o.getId());
-        dto.setUsername(o.getUser() != null ? o.getUser().getUsername() : null);
+        // Use denormalized username if user was deleted
+        dto.setUsername(o.getUser() != null ? o.getUser().getUsername() : o.getCustomerUsername());
         dto.setTotalAmount(o.getTotalAmount());
         dto.setOrderStatus(o.getOrderStatus());
         dto.setPaymentStatus(o.getPaymentStatus());
@@ -118,8 +119,14 @@ public class OrderService {
         var dtos = items.stream().map(it -> {
             OrderItemDto idto = new OrderItemDto();
             idto.setId(it.getId());
-            idto.setBookId(it.getBook().getId());
-            idto.setTitle(it.getBook().getTitle());
+            // Use denormalized book info if book was deleted
+            if (it.getBook() != null) {
+                idto.setBookId(it.getBook().getId());
+                idto.setTitle(it.getBook().getTitle());
+            } else {
+                idto.setBookId(null);
+                idto.setTitle(it.getBookTitle() + " (deleted)");
+            }
             idto.setQuantity(it.getQuantity());
             idto.setUnitPrice(it.getUnitPrice());
             idto.setSubtotal(it.getSubtotal());

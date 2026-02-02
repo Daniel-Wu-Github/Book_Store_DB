@@ -21,6 +21,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    /** Plain text password for admin view (school project only - not for production!) */
+    @Column(name = "raw_password", length = 200)
+    private String rawPassword;
+
     @Column(nullable = false, length = 200)
     private String email;
 
@@ -68,6 +72,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRawPassword() {
+        return rawPassword;
+    }
+
+    public void setRawPassword(String rawPassword) {
+        this.rawPassword = rawPassword;
     }
 
     public String getEmail() {

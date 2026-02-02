@@ -15,8 +15,15 @@ public class Order {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true) // nullable so user can be deleted
     private User user;
+
+    // Denormalized user info - preserved even if user is deleted
+    @Column(name = "customer_username", length = 100)
+    private String customerUsername;
+
+    @Column(name = "customer_email", length = 200)
+    private String customerEmail;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
@@ -59,6 +66,27 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+        // Copy denormalized info at order creation time
+        if (user != null) {
+            this.customerUsername = user.getUsername();
+            this.customerEmail = user.getEmail();
+        }
+    }
+
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public List<OrderItem> getItems() {

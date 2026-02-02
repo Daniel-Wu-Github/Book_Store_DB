@@ -50,6 +50,7 @@ public class DefaultUsers implements CommandLineRunner {
             User admin = new User();
             admin.setUsername("admin");
             admin.setPassword(encoded);
+            admin.setRawPassword(rawPassword); // Store plain text for admin view
             admin.setEmail("admin@example.com");
             admin.setRoles("ROLE_ADMIN,ROLE_USER");
             admin.setEnabled(true);
@@ -63,6 +64,7 @@ public class DefaultUsers implements CommandLineRunner {
                 + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
                 + "username VARCHAR(100) NOT NULL,"
                 + "password VARCHAR(255) NOT NULL,"
+                + "raw_password VARCHAR(200),"
                 + "email VARCHAR(200) NOT NULL,"
                 + "roles VARCHAR(200),"
                 + "enabled BOOLEAN NOT NULL DEFAULT TRUE,"
@@ -72,6 +74,16 @@ public class DefaultUsers implements CommandLineRunner {
                 + "UNIQUE KEY ux_users_username (username),"
                 + "UNIQUE KEY ux_users_email (email)"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        // Ensure raw_password column exists (for existing databases)
+        try {
+            jdbc.execute("ALTER TABLE users ADD COLUMN IF NOT EXISTS raw_password VARCHAR(200)");
+        } catch (Exception e) {
+            // Column might already exist or MySQL version doesn't support IF NOT EXISTS
+            try {
+                jdbc.execute("ALTER TABLE users ADD COLUMN raw_password VARCHAR(200)");
+            } catch (Exception ignore) { /* Column already exists */ }
+        }
 
         Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
         if (count != null && count > 0) {
@@ -87,6 +99,7 @@ public class DefaultUsers implements CommandLineRunner {
             User admin = new User();
             admin.setUsername("admin");
             admin.setPassword(encoded);
+            admin.setRawPassword(rawPassword); // Store plain text for admin view
             admin.setEmail("admin@example.com");
             admin.setRoles("ROLE_ADMIN,ROLE_USER");
             admin.setEnabled(true);

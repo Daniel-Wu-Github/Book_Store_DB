@@ -1,6 +1,8 @@
 package com.bookstore.fx.controller;
 
 import com.bookstore.fx.api.ApiClient;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -57,13 +59,21 @@ public class BooksController {
     @FXML
     public void onSearch() {
         String q = searchField.getText();
-        try {
-            List<Map<String,Object>> results = api.searchBooks(q == null ? "" : q);
+        statusLabel.setText("Searching...");
+        String query = q == null ? "" : q;
+        Task<List<Map<String,Object>>> task = new Task<>() {
+            @Override
+            protected List<Map<String,Object>> call() throws Exception {
+                return api.searchBooks(query);
+            }
+        };
+        task.setOnSucceeded(ev -> {
+            List<Map<String,Object>> results = task.getValue();
             booksData.setAll(results);
             statusLabel.setText("Found " + results.size() + " books");
-        } catch (Exception e) {
-            statusLabel.setText("Search error: " + e.getMessage());
-        }
+        });
+        task.setOnFailed(ev -> statusLabel.setText("Search error: " + task.getException().getMessage()));
+        new Thread(task, "search-task").start();
     }
 
     @FXML
@@ -108,23 +118,29 @@ public class BooksController {
             statusLabel.setText("Cart empty");
             return;
         }
-        try {
-            // Build items array with required fields for backend
-            List<Map<String,Object>> items = new ArrayList<>();
-            for (Map<String,Object> c : cartData) {
-                Map<String,Object> item = new HashMap<>();
-                item.put("bookId", c.get("bookId"));
-                item.put("quantity", c.get("quantity"));
-                item.put("itemType", c.get("itemType"));
-                if (c.containsKey("rentalDays")) item.put("rentalDays", c.get("rentalDays"));
-                items.add(item);
+        statusLabel.setText("Placing order...");
+        List<Map<String,Object>> items = new ArrayList<>();
+        for (Map<String,Object> c : cartData) {
+            Map<String,Object> item = new HashMap<>();
+            item.put("bookId", c.get("bookId"));
+            item.put("quantity", c.get("quantity"));
+            item.put("itemType", c.get("itemType"));
+            if (c.containsKey("rentalDays")) item.put("rentalDays", c.get("rentalDays"));
+            items.add(item);
+        }
+        Task<Map<String,Object>> task = new Task<>() {
+            @Override
+            protected Map<String,Object> call() throws Exception {
+                return api.placeOrder(items);
             }
-            Map<String,Object> order = api.placeOrder(items);
+        };
+        task.setOnSucceeded(ev -> {
+            Map<String,Object> order = task.getValue();
             statusLabel.setText("Order placed: status=" + order.get("paymentStatus"));
             cartData.clear();
-        } catch (IOException | InterruptedException e) {
-            statusLabel.setText("Order error: " + e.getMessage());
-        }
+        });
+        task.setOnFailed(ev -> statusLabel.setText("Order error: " + task.getException().getMessage()));
+        new Thread(task, "place-order-task").start();
     }
 
     private static javafx.beans.property.ReadOnlyObjectWrapper<String> fxString(Object v) {

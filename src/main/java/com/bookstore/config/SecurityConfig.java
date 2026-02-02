@@ -21,10 +21,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         // Session-based authentication for REST: allow registration & auth endpoints, secure others.
         http
-            // For simplicity in this implementation we disable CSRF for the API. For production
-            // using sessions, enable CSRF and have the frontend send the CSRF token on stateful requests.
             .csrf().disable()
             .authorizeRequests()
+                // Public access to book browsing (read-only)
+                .antMatchers(org.springframework.http.HttpMethod.GET, "/api/books", "/api/books/**").permitAll()
                 .antMatchers("/api/auth/**", "/", "/index.html", "/static/**", "/favicon.ico", "/**/*.css", "/**/*.js").permitAll()
                 .anyRequest().authenticated()
             .and()

@@ -31,9 +31,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@Valid @RequestBody CreateUserRequest req) {
-        UserDto dto = userService.createUser(req);
-        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    public ResponseEntity<?> register(@Valid @RequestBody CreateUserRequest req) {
+        try {
+            UserDto dto = userService.createUser(req);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", e.getMessage()));
+        }
     }
 
     @PostMapping("/login")

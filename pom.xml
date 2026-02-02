@@ -50,6 +50,12 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
+    <!-- Actuator for health/readiness endpoints (useful for cloud probes) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
     <!-- JWT (optional: or use spring-security oauth2/jose) -->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>

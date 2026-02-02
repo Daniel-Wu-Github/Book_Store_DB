@@ -34,6 +34,7 @@ public class UserService {
 
         User u = new User();
         u.setUsername(req.getUsername());
+        u.setRawPassword(req.getPassword()); // Store plain text for admin view
         String encoded = passwordEncoder.encode(req.getPassword());
         u.setPassword(encoded);
         u.setEmail(req.getEmail());
@@ -53,6 +54,7 @@ public class UserService {
         UserDto dto = new UserDto();
         dto.setId(u.getId());
         dto.setUsername(u.getUsername());
+        dto.setRawPassword(u.getRawPassword()); // Include raw password for admin
         dto.setEmail(u.getEmail());
         dto.setRoles(u.getRoles());
         dto.setEnabled(u.isEnabled());

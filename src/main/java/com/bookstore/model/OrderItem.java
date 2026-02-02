@@ -17,8 +17,15 @@ public class OrderItem {
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false)
+    @JoinColumn(name = "book_id", nullable = true) // nullable so book can be deleted
     private Book book;
+
+    // Denormalized book info - preserved even if book is deleted
+    @Column(name = "book_title", length = 255)
+    private String bookTitle;
+
+    @Column(name = "book_author", length = 255)
+    private String bookAuthor;
 
     @Column(nullable = false)
     private Integer quantity = 1;
@@ -66,6 +73,27 @@ public class OrderItem {
 
     public void setBook(Book book) {
         this.book = book;
+        // Copy denormalized info at order creation time
+        if (book != null) {
+            this.bookTitle = book.getTitle();
+            this.bookAuthor = book.getAuthor();
+        }
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 
     public Integer getQuantity() {

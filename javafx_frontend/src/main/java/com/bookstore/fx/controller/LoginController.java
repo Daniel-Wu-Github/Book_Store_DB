@@ -2,6 +2,8 @@ package com.bookstore.fx.controller;
 
 import com.bookstore.fx.api.ApiClient;
 import com.bookstore.fx.core.SceneRouter;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -27,17 +29,24 @@ public class LoginController {
             statusLabel.setText("Enter credentials");
             return;
         }
-        try {
-            boolean ok = api.login(u, p);
-            if (ok) {
+        statusLabel.setText("Logging in...");
+        Task<Boolean> task = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return api.login(u, p);
+            }
+        };
+        task.setOnSucceeded(ev -> {
+            Boolean ok = task.getValue();
+            if (ok != null && ok) {
                 statusLabel.setText("");
-                SceneRouter.navigate("/fxml/MainView.fxml");
+                Platform.runLater(() -> SceneRouter.navigate("/fxml/MainView.fxml"));
             } else {
                 statusLabel.setText("Login failed");
             }
-        } catch (Exception e) {
-            statusLabel.setText("Error: " + e.getMessage());
-        }
+        });
+        task.setOnFailed(ev -> statusLabel.setText("Error: " + task.getException().getMessage()));
+        new Thread(task, "login-task").start();
     }
 
     @FXML

@@ -4,4 +4,8 @@ import App from './App'
 import './index.css'
 
 const container = document.getElementById('root')
-createRoot(container).render(<App />)
+if (!container) {
+	console.error('Root element #root not found. App not mounted.')
+} else {
+	createRoot(container).render(<App />)
+}

@@ -2,6 +2,8 @@ package com.bookstore.fx.controller;
 
 import com.bookstore.fx.api.ApiClient;
 import com.bookstore.fx.core.SceneRouter;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -41,16 +43,23 @@ public class RegisterController {
             statusLabel.setText("Enter a valid email address");
             return;
         }
-        try {
-            boolean ok = api.register(u, e, p);
-            if (ok) {
+        statusLabel.setText("Registering...");
+        Task<Boolean> task = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return api.register(u, e, p);
+            }
+        };
+        task.setOnSucceeded(ev -> {
+            Boolean ok = task.getValue();
+            if (ok != null && ok) {
                 statusLabel.setText("Registered. Please login.");
             } else {
                 statusLabel.setText("Register failed");
             }
-        } catch (Exception ex) {
-            statusLabel.setText("Error: " + ex.getMessage());
-        }
+        });
+        task.setOnFailed(ev -> statusLabel.setText("Error: " + task.getException().getMessage()));
+        new Thread(task, "register-task").start();
     }
 
     @FXML
