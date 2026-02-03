@@ -20,9 +20,11 @@ async function api(path, options = {}) {
 // ============ Contexts ============
 const AuthContext = createContext(null)
 const ToastContext = createContext(null)
+const ThemeContext = createContext(null)
 
 function useAuth() { return useContext(AuthContext) }
 function useToast() { return useContext(ToastContext) }
+function useTheme() { return useContext(ThemeContext) }
 
 // ============ Toast Notifications ============
 function ToastProvider({ children }) {
@@ -48,6 +50,20 @@ function ToastProvider({ children }) {
         ))}
       </div>
     </ToastContext.Provider>
+  )
+}
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    try { localStorage.setItem('theme', next) } catch (e) {}
+  }
+  return (
+    <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
+      {theme === 'dark' ? '🌙' : '☀️'}
+    </button>
   )
 }
 
@@ -1017,6 +1033,18 @@ export default function App() {
   const [page, setPage] = useState('login')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem('theme')
+      if (saved) return saved
+    } catch (e) {}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+    return 'light'
+  })
+
+  useEffect(() => {
+    try { document.documentElement.setAttribute('data-theme', theme) } catch (e) {}
+  }, [theme])
 
   useEffect(() => {
     api('/auth/me').then(res => res.ok ? res.json() : null)
@@ -1043,12 +1071,17 @@ export default function App() {
   )
 
   return (
-    <ToastProvider>
-      <AuthContext.Provider value={{ user }}>
-        {page === 'login' && <LoginPage onLogin={handleLogin} onGoRegister={() => setPage('register')} />}
-        {page === 'register' && <RegisterPage onGoLogin={() => setPage('login')} />}
-        {page === 'main' && <MainApp user={user} onLogout={handleLogout} />}
-      </AuthContext.Provider>
-    </ToastProvider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <ToastProvider>
+        <AuthContext.Provider value={{ user }}>
+          <div>
+            <ThemeToggle />
+            {page === 'login' && <LoginPage onLogin={handleLogin} onGoRegister={() => setPage('register')} />}
+            {page === 'register' && <RegisterPage onGoLogin={() => setPage('login')} />}
+            {page === 'main' && <MainApp user={user} onLogout={handleLogout} />}
+          </div>
+        </AuthContext.Provider>
+      </ToastProvider>
+    </ThemeContext.Provider>
   )
 }
