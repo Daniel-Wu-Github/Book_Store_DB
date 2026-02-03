@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, createContext, useContext } from 'react'
+import AnimatedBook from './AnimatedBook'
 
 // ============ API Client ============
 const API_BASE = '/api'
@@ -165,7 +166,7 @@ function LoginPage({ onLogin, onGoRegister }) {
     <div className="auth-page">
       <div className="auth-container">
         <div className="auth-header">
-          <div className="auth-logo">📚</div>
+          <div className="auth-logo"><AnimatedBook size={120} /></div>
           <h1>Welcome Back</h1>
           <p>Sign in to access your bookstore account</p>
         </div>
@@ -283,7 +284,7 @@ function RegisterPage({ onGoLogin }) {
     <div className="auth-page">
       <div className="auth-container">
         <div className="auth-header">
-          <div className="auth-logo">📚</div>
+          <div className="auth-logo"><AnimatedBook size={64} /></div>
           <h1>Create Account</h1>
           <p>Join our community of book lovers</p>
         </div>
@@ -946,7 +947,7 @@ function MainApp({ user, onLogout }) {
     <div className={`app-layout ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
       <aside className="sidebar">
         <div className="sidebar-header">
-          <span className="sidebar-logo">📚</span>
+          <span className="sidebar-logo"><AnimatedBook size={32} /></span>
           <span className="sidebar-title">The Cozy Bookshop</span>
         </div>
         
