@@ -2,8 +2,11 @@ import React, { useEffect, useState, useCallback, createContext, useContext } fr
 import AnimatedBook from './AnimatedBook'
 
 // ============ API Client ============
-// Use environment variable for production, fallback to /api for local dev (proxied by Vite)
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api'
+// Detect production (Vercel) vs local dev
+const isProduction = window.location.hostname.includes('vercel.app')
+const API_BASE = isProduction 
+  ? 'https://bookstore-backend-api-8acfb9e7cc5c.herokuapp.com/api'
+  : (import.meta.env.VITE_API_BASE_URL || '/api')
 
 async function api(path, options = {}) {
   const res = await fetch(API_BASE + path, {
@@ -156,10 +159,19 @@ function LoginPage({ onLogin, onGoRegister }) {
     setLoading(true)
     setError('')
     try {
+      console.log('Attempting login to:', API_BASE + '/auth/login')
       const res = await api('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) })
+      console.log('Login response status:', res.status)
       if (res.ok) { onLogin() } 
-      else { setError('Invalid username or password') }
-    } catch (err) { setError('Connection error. Please try again.') }
+      else { 
+        const text = await res.text()
+        console.log('Login failed:', res.status, text)
+        setError(`Login failed (${res.status}): ${text || 'Invalid credentials'}`) 
+      }
+    } catch (err) { 
+      console.error('Login error:', err)
+      setError('Connection error: ' + err.message) 
+    }
     finally { setLoading(false) }
   }
 
