@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback, createContext, useContext } fr
 import AnimatedBook from './AnimatedBook'
 
 // ============ API Client ============
-const API_BASE = '/api'
+// Use environment variable for production, fallback to /api for local dev (proxied by Vite)
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api'
 
 async function api(path, options = {}) {
   const res = await fetch(API_BASE + path, {

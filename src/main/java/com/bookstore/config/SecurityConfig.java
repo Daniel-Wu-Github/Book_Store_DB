@@ -21,6 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         // Session-based authentication for REST: allow registration & auth endpoints, secure others.
         http
+            .cors().and()
             .csrf().disable()
             .authorizeRequests()
                 // Public access to book browsing (read-only)

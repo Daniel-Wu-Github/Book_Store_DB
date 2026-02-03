@@ -20,6 +20,7 @@ public class DevWebSecurityConfig {
         // Simpler dev behavior: permit all requests (no auth) so local frontend/dev server
         // can access APIs without popups or Basic auth. This is ONLY active under 'dev' profile.
         http
+            .cors().and()
             .csrf().disable()
             .authorizeRequests().anyRequest().permitAll();
 
