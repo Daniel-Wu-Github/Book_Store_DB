@@ -43,8 +43,13 @@ public class MagicLinkService {
 
     @Transactional
     public Optional<String> createAndSendToken(String email, HttpServletRequest req) {
+        log.debug("createAndSendToken called for email={}", email);
         Optional<User> userOpt = userRepository.findByEmail(email);
-        if (userOpt.isEmpty()) return Optional.empty();
+        if (userOpt.isEmpty()) {
+            log.info("No user found for magic link email={}", email);
+            return Optional.empty();
+        }
+        log.info("Found user for email={}", email);
 
         String token = UUID.randomUUID().toString();
         LoginToken lt = new LoginToken();
