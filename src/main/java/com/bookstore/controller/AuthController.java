@@ -3,6 +3,9 @@ package com.bookstore.controller;
 import com.bookstore.dto.CreateUserRequest;
 import com.bookstore.dto.UserDto;
 import com.bookstore.service.UserService;
+import com.bookstore.service.MagicLinkService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,10 +27,54 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+    private final MagicLinkService magicLinkService;
+    private final UserDetailsService userDetailsService;
 
-    public AuthController(AuthenticationManager authenticationManager, UserService userService) {
+    public AuthController(AuthenticationManager authenticationManager, UserService userService, MagicLinkService magicLinkService, UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
+        this.magicLinkService = magicLinkService;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @PostMapping("/magic-link")
+    public ResponseEntity<?> requestMagicLink(@RequestBody Map<String, String> body, HttpServletRequest request) {
+        String email = body.get("email");
+        if (email == null || email.isBlank()) return ResponseEntity.badRequest().body(Map.of("error", "email required"));
+
+        // create and send token; service returns Optional.empty() if user not found
+        try {
+            var result = magicLinkService.createAndSendToken(email, request);
+            if (result.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "email not found"));
+            }
+            // If result contains null link -> sending failed
+            if (result.get() == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "failed to send email"));
+            }
+            return ResponseEntity.ok(Map.of("message", "magic link sent"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/magic/consume")
+    public ResponseEntity<?> consumeMagic(@RequestParam("token") String token, @RequestParam(value = "redirect", required = false) String redirect, HttpServletRequest request) {
+        if (token == null || token.isBlank()) return ResponseEntity.badRequest().body(Map.of("error", "token required"));
+        var userOpt = magicLinkService.consumeToken(token);
+        if (userOpt.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "invalid or expired token"));
+
+        var user = userOpt.get();
+        try {
+            UserDetails ud = userDetailsService.loadUserByUsername(user.getUsername());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            request.getSession(true);
+            String dest = (redirect == null || redirect.isBlank()) ? "/" : redirect;
+            return ResponseEntity.status(HttpStatus.FOUND).header("Location", dest).build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "failed to sign in user"));
+        }
     }
 
     @PostMapping("/register")

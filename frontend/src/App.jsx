@@ -165,9 +165,12 @@ function Stat({ label, value, icon: Icon }) {
 function LoginPage({ onLogin, onGoRegister }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [magicEmail, setMagicEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [magicLoading, setMagicLoading] = useState(false)
+  const toast = useToast()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -191,6 +194,24 @@ function LoginPage({ onLogin, onGoRegister }) {
     finally { setLoading(false) }
   }
 
+  const handleSendMagic = async () => {
+    if (!magicEmail || !/^[^@\n]+@[^@\n]+\.[^@\n]+$/.test(magicEmail)) { toast.addToast('Enter a valid email', 'error'); return }
+    setMagicLoading(true)
+    try {
+      const res = await api('/auth/magic-link', { method: 'POST', body: JSON.stringify({ email: magicEmail }) })
+      if (res.ok) {
+        toast.addToast('Magic link sent — check your email', 'success')
+      } else if (res.status === 404) {
+        toast.addToast('Email not found', 'error')
+      } else {
+        const txt = await res.text().catch(() => '')
+        toast.addToast('Failed to send link: ' + (txt || res.status), 'error')
+      }
+    } catch (err) {
+      toast.addToast('Connection error: ' + err.message, 'error')
+    } finally { setMagicLoading(false) }
+  }
+
   return (
     <div className="auth-page">
       <div className="auth-container">
@@ -208,6 +229,16 @@ function LoginPage({ onLogin, onGoRegister }) {
             onChange={e => setUsername(e.target.value)}
             autoComplete="username"
           />
+            <Input 
+              label="Email (for magic link)"
+              type="email"
+              placeholder="Enter email to receive login link"
+              value={magicEmail}
+              onChange={e => setMagicEmail(e.target.value)}
+            />
+            <div style={{display:'flex',gap:8}}>
+              <Button type="button" onClick={handleSendMagic} loading={magicLoading} variant="secondary">Email me a login link</Button>
+            </div>
           <div className="input-group">
             <label className="input-label">Password</label>
             <div className="input-wrapper">
