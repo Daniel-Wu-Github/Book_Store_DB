@@ -243,6 +243,7 @@ function LoginPage({ onLogin, onGoRegister }) {
   }
 
   return (
+    <>
     <div className="auth-page">
       <div className="auth-container">
         <div className="auth-header">
@@ -311,6 +312,7 @@ function LoginPage({ onLogin, onGoRegister }) {
       setEmail={setMagicEmail}
       loading={magicLoading}
     />
+    </>
   )
 }
 
