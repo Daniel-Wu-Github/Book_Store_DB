@@ -138,6 +138,35 @@ function Modal({ isOpen, onClose, title, children, size = 'md' }) {
   )
 }
 
+function MagicLinkHandler({ onLogin }) {
+  const toast = useToast()
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const token = params.get('token')
+      if (!token) return
+      ;(async () => {
+        try {
+          const res = await api('/auth/magic/consume-api', { method: 'POST', body: JSON.stringify({ token }) })
+          if (res.ok) {
+            toast.addToast('Signed in via email link', 'success')
+            await onLogin()
+            // remove token from URL without reloading
+            const clean = window.location.pathname
+            window.history.replaceState({}, document.title, clean)
+          } else {
+            const txt = await res.text().catch(() => '')
+            toast.addToast('Magic link failed: ' + (txt || res.status), 'error')
+          }
+        } catch (err) {
+          toast.addToast('Connection error: ' + err.message, 'error')
+        }
+      })()
+    } catch (e) {}
+  }, [])
+  return null
+}
+
 function EmptyState({ icon: Icon, title, description, action }) {
   return (
     <div className="empty-state">
@@ -170,6 +199,7 @@ function LoginPage({ onLogin, onGoRegister }) {
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [magicLoading, setMagicLoading] = useState(false)
+  const [magicOpen, setMagicOpen] = useState(false)
   const toast = useToast()
 
   const handleSubmit = async (e) => {
@@ -229,16 +259,7 @@ function LoginPage({ onLogin, onGoRegister }) {
             onChange={e => setUsername(e.target.value)}
             autoComplete="username"
           />
-            <Input 
-              label="Email (for magic link)"
-              type="email"
-              placeholder="Enter email to receive login link"
-              value={magicEmail}
-              onChange={e => setMagicEmail(e.target.value)}
-            />
-            <div style={{display:'flex',gap:8}}>
-              <Button type="button" onClick={handleSendMagic} loading={magicLoading} variant="secondary">Email me a login link</Button>
-            </div>
+            {/* magic link trigger moved to footer modal */}
           <div className="input-group">
             <label className="input-label">Password</label>
             <div className="input-wrapper">
@@ -265,6 +286,7 @@ function LoginPage({ onLogin, onGoRegister }) {
 
         <div className="auth-footer">
           <p>Don't have an account? <button className="link-btn" onClick={onGoRegister}>Create one</button></p>
+          <p style={{marginTop:8}}><button className="link-btn" onClick={() => setMagicOpen(true)}>click for a one time sign-in link</button></p>
         </div>
       </div>
       
@@ -280,6 +302,20 @@ function LoginPage({ onLogin, onGoRegister }) {
         </div>
       </div>
     </div>
+  )
+}
+
+// Modal for magic link email entry
+function MagicLinkModal({ isOpen, onClose, onSend, email, setEmail, loading }) {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="One-time sign-in link" size="sm">
+      <p>Enter your account email and we'll send a one-time sign-in link.</p>
+      <Input label="Email" type="email" placeholder="you@email.com" value={email} onChange={e => setEmail(e.target.value)} />
+      <div style={{display:'flex', gap:8, marginTop:12}}>
+        <Button onClick={onSend} loading={loading} variant="secondary">Send link</Button>
+        <Button variant="ghost" onClick={onClose}>Cancel</Button>
+      </div>
+    </Modal>
   )
 }
 
@@ -1104,6 +1140,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ToastProvider>
+        <MagicLinkHandler onLogin={handleLogin} />
         <AuthContext.Provider value={{ user }}>
           <div>
             <ThemeToggle />

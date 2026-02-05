@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -60,12 +59,22 @@ public class MagicLinkService {
         lt.setUsed(false);
         tokenRepo.save(lt);
 
-        // Build consume URL that will be handled by backend and then redirect to frontend
-        String base = req.getRequestURL().toString().replace(req.getRequestURI(), "") + req.getContextPath();
-        String consumePath = "/api/auth/magic/consume?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
-        String redirectTo = (frontendBase != null && !frontendBase.isBlank()) ? frontendBase : "";
-        if (!redirectTo.isBlank()) consumePath += "&redirect=" + URLEncoder.encode(redirectTo, StandardCharsets.UTF_8);
-        String link = base + consumePath;
+        // Prefer a frontend-hosted consume page when configured so the client can
+        // call the backend via XHR and establish the session in-place.
+        String link;
+        if (frontendBase != null && !frontendBase.isBlank()) {
+            String frontendConsume = frontendBase;
+            if (!frontendConsume.endsWith("/")) frontendConsume += "";
+            frontendConsume += "/magic?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+            link = frontendConsume;
+        } else {
+            // Fallback: consume via backend endpoint (keeps previous behavior)
+            String base = req.getRequestURL().toString().replace(req.getRequestURI(), "") + req.getContextPath();
+            String consumePath = "/api/auth/magic/consume?token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+            String redirectTo = (frontendBase != null && !frontendBase.isBlank()) ? frontendBase : "";
+            if (!redirectTo.isBlank()) consumePath += "&redirect=" + URLEncoder.encode(redirectTo, StandardCharsets.UTF_8);
+            link = base + consumePath;
+        }
 
         try {
             SimpleMailMessage msg = new SimpleMailMessage();

@@ -77,6 +77,25 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/magic/consume-api")
+    public ResponseEntity<?> consumeMagicApi(@RequestBody Map<String, String> body, HttpServletRequest request) {
+        String token = body.get("token");
+        if (token == null || token.isBlank()) return ResponseEntity.badRequest().body(Map.of("error", "token required"));
+        var userOpt = magicLinkService.consumeToken(token);
+        if (userOpt.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "invalid or expired token"));
+
+        var user = userOpt.get();
+        try {
+            UserDetails ud = userDetailsService.loadUserByUsername(user.getUsername());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            request.getSession(true);
+            return ResponseEntity.ok(Map.of("message", "signed-in"));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "failed to sign in user"));
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody CreateUserRequest req) {
         try {
