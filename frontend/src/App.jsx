@@ -302,6 +302,15 @@ function LoginPage({ onLogin, onGoRegister }) {
         </div>
       </div>
     </div>
+    
+    <MagicLinkModal
+      isOpen={magicOpen}
+      onClose={() => setMagicOpen(false)}
+      onSend={handleSendMagic}
+      email={magicEmail}
+      setEmail={setMagicEmail}
+      loading={magicLoading}
+    />
   )
 }
 
